@@ -3,6 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import { AppShell, Header, Footer, Aside, Text, MediaQuery, Burger, Group, Switch } from '@mantine/core';
 import { ActionIcon, Image, useMantineTheme, MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons';
+// @ts-ignore
 import logoC from './assets/prbr-logo-c.svg';
 // import logoBW from './prbr-logo-bw.svg';
 
