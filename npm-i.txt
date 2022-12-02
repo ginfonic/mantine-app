@@ -1,0 +1,8 @@
+1. npx create-react-app mantine-app --template typescript
+2. npm i @mantine/core @mantine/hooks @mantine/form @mantine/dates dayjs @mantine/notifications @mantine/prism @mantine/tiptap @tabler/icons @tiptap/react @tiptap/extension-link @tiptap/starter-kit @mantine/dropzone @mantine/carousel embla-carousel-react @mantine/spotlight @mantine/modals @mantine/nprogress @emotion/react
+3. npm i @tabler/icons
+4. npm i react-router-dom
+5a. npm i @reduxjs/toolkit
+5b. npm i react-redux
+6. npm i uuid
+7. npm i axios
