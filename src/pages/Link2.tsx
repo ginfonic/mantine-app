@@ -1,7 +1,7 @@
 // Страница Заглушка 2
 import {Text, Title} from "@mantine/core";
 
-const PRBRLink2 = () => {
+const Link2 = () => {
   return (
     <>
       <Title order={5} color="blue">Сбербанк подал иски из-за утраты контроля над европейскими «дочками»</Title>
@@ -11,4 +11,4 @@ const PRBRLink2 = () => {
     </>
   );
 }
-export default PRBRLink2;
+export default Link2;

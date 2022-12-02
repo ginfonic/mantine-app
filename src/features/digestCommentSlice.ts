@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface DigestComment {
+export interface IDigestComment {
   id: string,
   articleId: string,
   commentId: string,
@@ -9,7 +9,7 @@ export interface DigestComment {
   text: string
 }
 
-const initialState: { comments: DigestComment[] } = { comments: [] }
+const initialState: { comments: IDigestComment[] } = { comments: [] }
 
 export const digestCommentSlice = createSlice({
   name: 'digestComments',

@@ -1,9 +1,9 @@
 // Компонент комментариев дайджеста
+import {FC, useState} from "react";
 import {ActionIcon, Avatar, Badge, Code, Group, Text, Textarea} from "@mantine/core";
 import {IconCheck, IconTrash} from "@tabler/icons";
-import {useState} from "react";
 
-const DigestComment = () => {
+const DigestComment: FC = () => {
   // const [opened, setOpened] = useState(false);
   const [comment, setComment] = useState("");
 

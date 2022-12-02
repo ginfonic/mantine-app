@@ -8,10 +8,10 @@ import logoC from './assets/prbr-logo-c.svg';
 // import logoBW from './prbr-logo-bw.svg';
 
 // Компоненты ПРБР
-import PRBRNavBar from './components/PRBRNavBar';
-import PRBRLink1 from "./pages/Link1";
-import PRBRLink2 from "./pages/Link2";
-import PRBRDigest from "./pages/Digest";
+import NavigationBar from './components/NavigationBar';
+import Link1 from "./pages/Link1";
+import Link2 from "./pages/Link2";
+import Digest from "./pages/Digest";
 
 const App = () => {
   const theme = useMantineTheme();
@@ -28,7 +28,7 @@ const App = () => {
           asideOffsetBreakpoint="sm"
           // Панель навигации
           navbar={
-            <PRBRNavBar hidden={!opened} />
+            <NavigationBar hidden={!opened} />
           }
           aside={
             <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
@@ -75,9 +75,9 @@ const App = () => {
         >
           {/*Основной блок*/}
           <Routes>
-            <Route path={"/"} element={<PRBRDigest />} />
-            <Route path={"/digest"} element={<PRBRLink1 />} />
-            <Route path={"/digest_alt"} element={<PRBRLink2 />} />
+            <Route path={"/"} element={<Digest />} />
+            <Route path={"/link1"} element={<Link1 />} />
+            <Route path={"/link2"} element={<Link2 />} />
           </Routes>
         </AppShell>
       </MantineProvider>

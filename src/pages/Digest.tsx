@@ -3,7 +3,7 @@ import {Grid} from "@mantine/core";
 import DigestCard from "../components/DigestCard";
 import digestSample from "../assets/sample-digest.json";
 
-const PRBRDigest = () => {
+const Digest = () => {
   return (
     <Grid>
       {digestSample.map((item) => (
@@ -19,4 +19,4 @@ const PRBRDigest = () => {
     </Grid>
   );
 }
-export default PRBRDigest;
+export default Digest;
