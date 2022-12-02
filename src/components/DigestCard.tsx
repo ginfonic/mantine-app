@@ -1,22 +1,22 @@
 //Компонент Карточка дайджеста
+import {FC, useState} from "react";
 import {Group, Card, Image, Text, Badge, ActionIcon} from "@mantine/core";
 import {IconThumbUp, IconThumbDown, IconMessage, IconCalendarEvent}
   from "@tabler/icons";
-import {useState} from "react";
 import DigestComment from "./DigestComment";
 
 // Тип пропсов карточки дайджеста ПРБР
-interface PRBRDigestCardProps {
+interface DigestCardProps {
   picture?: string;
   title?: string;
   text: string;
   link?: string;
 }
 
-const DigestCard = (props: PRBRDigestCardProps) => {
+const DigestCard: FC<DigestCardProps> = (props) => {
   // Заглушка отсутствующих фотографий
   const pictureDummy: string = "https://lost-car-keys-replacement.com/wp-content/uploads/No-image-yet-for-this-key-coming-soon-1536x1229.jpg";
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState<boolean>(false);
 
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>

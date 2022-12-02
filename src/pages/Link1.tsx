@@ -1,7 +1,7 @@
 // Страница Заглушка 1
 import {Text, Title} from "@mantine/core";
 
-const PRBRLink1 = () => {
+const Link1 = () => {
   return (
     <>
       <Title order={5} color="blue">Мобильное приложение для сервисов Сбербанка исчезло из App Store</Title>
@@ -12,4 +12,4 @@ const PRBRLink1 = () => {
     </>
   );
 }
-export default PRBRLink1;
+export default Link1;
