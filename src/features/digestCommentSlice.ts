@@ -2,17 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface IDigestComment {
   id: string,
-  articleId: string,
-  commentId: string,
+  cardId: string,
   author: string,
-  dateTime: Date,
+  date: Date,
   text: string
 }
 
 const initialState: { comments: IDigestComment[] } = { comments: [] }
 
 export const digestCommentSlice = createSlice({
-  name: 'digestComments',
+  name: 'comments',
   initialState,
   reducers: {
     addComment: (state, action) => {

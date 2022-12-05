@@ -1,7 +1,8 @@
 // Страница Заглушка 1
+import {FC} from "react";
 import {Text, Title} from "@mantine/core";
 
-const Link1 = () => {
+const Link1: FC = () => {
   return (
     <>
       <Title order={5} color="blue">Мобильное приложение для сервисов Сбербанка исчезло из App Store</Title>

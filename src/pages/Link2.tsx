@@ -1,7 +1,8 @@
 // Страница Заглушка 2
+import {FC} from "react";
 import {Text, Title} from "@mantine/core";
 
-const Link2 = () => {
+const Link2: FC = () => {
   return (
     <>
       <Title order={5} color="blue">Сбербанк подал иски из-за утраты контроля над европейскими «дочками»</Title>

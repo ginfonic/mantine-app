@@ -3,10 +3,11 @@ import {FC, useState} from "react";
 import {Group, Card, Image, Text, Badge, ActionIcon} from "@mantine/core";
 import {IconThumbUp, IconThumbDown, IconMessage, IconCalendarEvent}
   from "@tabler/icons";
-import DigestComment from "./DigestComment";
+import DigestCommentSection from "./DigestCommentSection";
 
-// Тип пропсов карточки дайджеста ПРБР
+// Тип пропсов карточки дайджеста
 interface DigestCardProps {
+  id: string;
   picture?: string;
   title?: string;
   text: string;
@@ -37,7 +38,7 @@ const DigestCard: FC<DigestCardProps> = (props) => {
           </Badge>
         </Group>
       </Card.Section>
-      <Text size="sm" color="dimmed" pb="md">
+      <Text size="sm" color="dimmed" mb="sm">
         {props.text}
       </Text>
       {/* Подвал с кнопками*/}
@@ -83,8 +84,8 @@ const DigestCard: FC<DigestCardProps> = (props) => {
         </Group>
       </Card.Section>
       {/* Комментарии */}
-      <Card.Section inheritPadding hidden={!opened}>
-        <DigestComment />
+      <Card.Section inheritPadding pb="md" mt="md" hidden={!opened}>
+        <DigestCommentSection cardId={props.id}/>
       </Card.Section>
     </Card>
   );
