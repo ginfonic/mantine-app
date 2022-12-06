@@ -37,7 +37,7 @@ const DigestCard: FC<DigestCardProps> = (props) => {
     useAppSelector((state) =>
       state.digestComments.comments
     )?.filter((comment) =>
-      comment.cardId === props.id
+      comment.articleId === props.id
     ).length;
 
   // Функция отправки данных в стор
@@ -143,7 +143,7 @@ const DigestCard: FC<DigestCardProps> = (props) => {
       </Card.Section>
       {/* Комментарии */}
       <Card.Section inheritPadding pb="md" mt="md" hidden={!commentsOpened}>
-        <DigestCommentSection cardId={props.id}/>
+        <DigestCommentSection articleId={props.id}/>
       </Card.Section>
     </Card>
   );
