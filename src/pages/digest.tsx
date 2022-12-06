@@ -1,7 +1,7 @@
 // Страница Дайджест
 import {FC} from "react";
 import {Grid} from "@mantine/core";
-import DigestCard from "../components/DigestCard";
+import DigestCard from "../features/digest/digest-card";
 import digestSample from "../assets/sample-digest.json";
 
 const Digest: FC = () => {

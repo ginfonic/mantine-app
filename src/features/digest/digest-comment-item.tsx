@@ -2,8 +2,8 @@
 import {FC} from "react";
 import {ActionIcon, Avatar, Code, Group, Text} from "@mantine/core";
 import {IconTrash} from "@tabler/icons";
-import {useDispatch} from "react-redux";
-import {removeComment} from '../features/digestCommentSlice';
+import {useAppDispatch} from '../../store/hooks';
+import {removeComment} from '../../store/digest-comment-slice';
 
 interface DigestCommentItemProps {
   id: string,
@@ -13,7 +13,7 @@ interface DigestCommentItemProps {
 }
 
 const DigestCommentItem: FC<DigestCommentItemProps> = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const removeCommentHandler = (id: string) => {
     dispatch(removeComment(id));

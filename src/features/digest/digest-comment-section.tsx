@@ -1,11 +1,11 @@
 // Компонент комментариев дайджеста
 import {FC, useState} from "react";
-import {ActionIcon, Avatar, Badge, Code, Group, Text, Textarea} from "@mantine/core";
-import {IconCheck, IconTrash} from "@tabler/icons";
-import {useDispatch, useSelector} from 'react-redux';
-import {addComment, IDigestComment} from "../features/digestCommentSlice";
+import {ActionIcon, Textarea} from "@mantine/core";
+import {IconCheck} from "@tabler/icons";
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {addComment, IDigestComment} from "../../store/digest-comment-slice";
 import {v4 as uuidv4} from 'uuid';
-import DigestCommentItem from "./DigestCommentItem";
+import DigestCommentItem from "./digest-comment-item";
 
 // Тип пропсов комментариев дайджеста
 interface DigestCommentSectionProps {
@@ -15,7 +15,7 @@ interface DigestCommentSectionProps {
 const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
   // const [opened, setOpened] = useState(false);
   const [commentValue, setCommentValue] = useState<string>('');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const addCommentHandler = (id: string) => {
     const comment: IDigestComment = {
@@ -31,8 +31,7 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
     }
   }
 
-  // @ts-ignore
-  const comments: IDigestComment[] = useSelector((state) => state.digestComment.comments);
+  const comments: IDigestComment[] = useAppSelector((state) => state.digestComment.comments);
 
   return (
     <>

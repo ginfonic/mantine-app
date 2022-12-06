@@ -1,9 +1,8 @@
 //Компонент Карточка дайджеста
 import {FC, useState} from "react";
 import {Group, Card, Image, Text, Badge, ActionIcon} from "@mantine/core";
-import {IconThumbUp, IconThumbDown, IconMessage, IconCalendarEvent}
-  from "@tabler/icons";
-import DigestCommentSection from "./DigestCommentSection";
+import {IconThumbUp, IconThumbDown, IconMessage, IconCalendarEvent} from "@tabler/icons";
+import DigestCommentSection from "./digest-comment-section";
 
 // Тип пропсов карточки дайджеста
 interface DigestCardProps {

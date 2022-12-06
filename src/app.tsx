@@ -8,10 +8,10 @@ import logoC from './assets/prbr-logo-c.svg';
 // import logoBW from './prbr-logo-bw.svg';
 
 // Компоненты ПРБР
-import NavigationBar from './components/NavigationBar';
-import Link1 from "./pages/Link1";
-import Link2 from "./pages/Link2";
-import Digest from "./pages/Digest";
+import NavigationBar from './features/navigation-bar';
+import Link1 from "./pages/link-1";
+import Link2 from "./pages/link-2";
+import Digest from "./pages/digest";
 
 const App = () => {
   const theme = useMantineTheme();
