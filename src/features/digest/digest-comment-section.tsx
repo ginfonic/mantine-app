@@ -1,61 +1,78 @@
-// Компонент комментариев дайджеста
+// Компонент секции комментариев дайджеста
 import {FC, useState} from "react";
 import {ActionIcon, Textarea} from "@mantine/core";
 import {IconCheck} from "@tabler/icons";
-import {useAppDispatch, useAppSelector} from '../../store/hooks';
-import {addComment, IDigestComment} from "../../store/digest-comment-slice";
 import {v4 as uuidv4} from 'uuid';
+
+// Хук добавления данных
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+// Редюсер добавления комментария и его тип
+import {addComment, IDigestComment} from "../../store/digest-comment-slice";
+// Компонент одного комментария дайджеста
 import DigestCommentItem from "./digest-comment-item";
 
-// Тип пропсов комментариев дайджеста
-interface DigestCommentSectionProps {
-  cardId: string;
-}
+// Тип пропсов секции комментариев дайджеста
+interface DigestCommentSectionProps { cardId: string }
 
+// Компонент
 const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
-  // const [opened, setOpened] = useState(false);
+  // Стейт текста комментария
   const [commentValue, setCommentValue] = useState<string>('');
+  // Функция отправки данных в стор
   const dispatch = useAppDispatch();
-
+  //Обработчик добавления комментария
   const addCommentHandler = (id: string) => {
+    // Заполняет комментарий
     const comment: IDigestComment = {
+      // Генерирует айди комментария
       id: uuidv4(),
+      // На входе айди карточки с новостью
       cardId: id,
+      // Авттор - пока дамми
       author: 'Иван Иванович Иванов',
+      // Текузая дата
       date: new Date(),
+      // Введенный текст комментария
       text: commentValue
     }
+    // Если комментарий содержит что-то
     if(commentValue) {
+      // Добавляет комментарий в стор
       dispatch(addComment(comment));
+      // Чистит форму
       setCommentValue('');
     }
   }
 
-  const comments: IDigestComment[] = useAppSelector((state) => state.digestComment.comments);
+  // Получает комментарии из стора и фильтрует их по принадлежности к карточке текущей статьи
+  const comments: IDigestComment[] =
+    useAppSelector((state) =>
+      state.digestComment.comments?.filter((comment) => comment.cardId === props.cardId)
+    );
 
   return (
     <>
+      {/* Форма ввода текста */}
       <Textarea
         value={commentValue}
         placeholder="Ваш комментарий"
         mb={5}
         onChange={(event) => setCommentValue(event.currentTarget.value)}
         rightSection={
+          // Кнопка подтверждения ввода
           <ActionIcon
             size="xs"
             variant="transparent"
             sx={{alignItems: "flex-end"}}
             // px={0} mx={0} py={5}
-            onClick={() => {
-              addCommentHandler(props.cardId);
-              // setOpened((o) => !o)
-            }}
+            onClick={() => { addCommentHandler(props.cardId); }}
           >
             <IconCheck size={16} stroke={1.5} />
           </ActionIcon>
         }
       />
-      {comments?.filter((comment) => comment.cardId === props.cardId)?.map((comment) => (
+      {/* Выводит комментарии */}
+      {comments?.map((comment) => (
         <DigestCommentItem
           id={comment.id}
           author={comment.author}

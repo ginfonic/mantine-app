@@ -1,7 +1,9 @@
-//Компонент Карточка дайджеста
+// Компонент карточки дайджеста
 import {FC, useState} from "react";
 import {Group, Card, Image, Text, Badge, ActionIcon} from "@mantine/core";
 import {IconThumbUp, IconThumbDown, IconMessage, IconCalendarEvent} from "@tabler/icons";
+
+// Компонент секции комментариев дайджеста
 import DigestCommentSection from "./digest-comment-section";
 
 // Тип пропсов карточки дайджеста
@@ -13,12 +15,15 @@ interface DigestCardProps {
   link?: string;
 }
 
+// Компонент
 const DigestCard: FC<DigestCardProps> = (props) => {
   // Заглушка отсутствующих фотографий
   const pictureDummy: string = "https://lost-car-keys-replacement.com/wp-content/uploads/No-image-yet-for-this-key-coming-soon-1536x1229.jpg";
-  const [opened, setOpened] = useState<boolean>(false);
+  // Стейт открытой/закрытой секции комментариев
+  const [commentsOpened, setCommentsOpened] = useState<boolean>(false);
 
   return (
+    // Карточка
     <Card shadow="sm" p="lg" radius="md" withBorder>
       {/* Картинка */}
       <Card.Section>
@@ -28,23 +33,28 @@ const DigestCard: FC<DigestCardProps> = (props) => {
           alt="Нет фото"
         />
       </Card.Section>
-      {/* Заголовок и текст*/}
-      <Card.Section inheritPadding >
+      {/* Заголовок и бейдж */}
+      <Card.Section inheritPadding>
         <Group position="apart" mt="md" mb="xs">
+          {/* Заголовок */}
           <Text weight={500} color="blue">{props.title}</Text>
+          {/* Бейдж */}
           <Badge color="red" variant="light">
             Новое
           </Badge>
         </Group>
       </Card.Section>
-      <Text size="sm" color="dimmed" mb="sm">
-        {props.text}
-      </Text>
+      {/* Текст */}
+      <Card.Section inheritPadding>
+        <Text size="sm" color="dimmed" mb="sm">
+          {props.text}
+        </Text>
+      </Card.Section>
       {/* Подвал с кнопками*/}
       <Card.Section inheritPadding>
         {/* Линейка кнопок */}
         <Group position="apart" >
-          {/* Левая часть */}
+          {/* Левая часть - пальцы и кнопка показа комментариев */}
           <Group>
             {/* Палец вверх */}
             <Group pr="xs">
@@ -60,20 +70,20 @@ const DigestCard: FC<DigestCardProps> = (props) => {
               </ActionIcon>
               <Badge size="xs" variant="filled" px={0} mx={-10} sx={{ width: 16, height: 16, padding: 0 }}> 24 </Badge>
             </Group>
-            {/* Комментарии */}
+            {/* Кнопка показа комментариев */}
             <Group pr="xs">
               <ActionIcon
                 size="xs"
                 variant="transparent"
                 px={0} mx={0}
-                onClick={() => setOpened((o) => !o)}
+                onClick={() => setCommentsOpened((o) => !o)}
               >
                 <IconMessage size={16} stroke={1.5} />
               </ActionIcon>
               <Badge size="xs" variant="filled" px={0} mx={-10} sx={{ width: 16, height: 16, padding: 0 }}> 2 </Badge>
             </Group>
           </Group>
-          {/* Правая часть */}
+          {/* Правая часть - дата*/}
           <Group>
             <ActionIcon size="xs" variant="transparent" px={0} mx={0} >
               <IconCalendarEvent size={16} stroke={1.5} />
@@ -83,7 +93,7 @@ const DigestCard: FC<DigestCardProps> = (props) => {
         </Group>
       </Card.Section>
       {/* Комментарии */}
-      <Card.Section inheritPadding pb="md" mt="md" hidden={!opened}>
+      <Card.Section inheritPadding pb="md" mt="md" hidden={!commentsOpened}>
         <DigestCommentSection cardId={props.id}/>
       </Card.Section>
     </Card>

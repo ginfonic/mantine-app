@@ -2,9 +2,12 @@
 import {FC} from "react";
 import {ActionIcon, Avatar, Code, Group, Text} from "@mantine/core";
 import {IconTrash} from "@tabler/icons";
+// Хук добавления данных
 import {useAppDispatch} from '../../store/hooks';
+// Редюсер удаления комментария
 import {removeComment} from '../../store/digest-comment-slice';
 
+// Тип пропсов компонента одного комментария
 interface DigestCommentItemProps {
   id: string,
   author: string,
@@ -12,10 +15,14 @@ interface DigestCommentItemProps {
   text: string
 }
 
+// Компонент
 const DigestCommentItem: FC<DigestCommentItemProps> = (props) => {
+  // Функция отправки данных в стор
   const dispatch = useAppDispatch();
 
+  //Обработчик удаления комментария
   const removeCommentHandler = (id: string) => {
+    // Удаляет комментарий по его айди
     dispatch(removeComment(id));
   }
   return(
@@ -29,7 +36,7 @@ const DigestCommentItem: FC<DigestCommentItemProps> = (props) => {
           <Text size="xs" fw={700} color="blue" ml={-5} >{props.author}</Text>
           <Text size="xs" color="dimmed" mx={-5}>{props.date.toLocaleString()}</Text>
         </Group>
-        {/* Правая часть */}
+        {/* Правая часть - кнопка удаления комментария*/}
         <Group mb={-20}>
           <ActionIcon
             size="xs"

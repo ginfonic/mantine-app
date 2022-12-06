@@ -1,24 +1,30 @@
+// Компонент приложения
 import { useState } from 'react';
 import { Link, Route, Routes } from "react-router-dom";
-import { AppShell, Header, Footer, Aside, Text, MediaQuery, Burger, Group, Switch } from '@mantine/core';
-import { ActionIcon, Image, useMantineTheme, MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+import { AppShell, Header, Footer, Aside, Text, MediaQuery,
+  Burger, Group, Switch, ActionIcon, Image, useMantineTheme,
+  MantineProvider, ColorSchemeProvider, ColorScheme}
+  from '@mantine/core';
 import { IconSun, IconMoonStars } from '@tabler/icons';
-// @ts-ignore
 import logoC from './assets/prbr-logo-c.svg';
 // import logoBW from './prbr-logo-bw.svg';
 
-// Компоненты ПРБР
+// Компонент панели навигации
 import NavigationBar from './features/navigation-bar';
+// Страницы-заглушки
 import Link1 from "./pages/link-1";
 import Link2 from "./pages/link-2";
+// Страница дайджеста
 import Digest from "./pages/digest";
 
+// Компонент
 const App = () => {
   const theme = useMantineTheme();
-  const [opened, setOpened] = useState<boolean>(false);
   const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+  const [opened, setOpened] = useState<boolean>(false);
 
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
@@ -26,10 +32,11 @@ const App = () => {
         <AppShell
           navbarOffsetBreakpoint="sm"
           asideOffsetBreakpoint="sm"
-          // Панель навигации
+          // Левая панель - панель навигации
           navbar={
             <NavigationBar hidden={!opened} />
           }
+          // Правая панель
           aside={
             <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
               <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 250}}>
@@ -37,15 +44,18 @@ const App = () => {
               </Aside>
             </MediaQuery>
           }
+          // Нижняя панель
           footer={
             <Footer height={60} p="md">
               Домой
             </Footer>
           }
+          // Верхняя панель
           header={
             <Header height={{ base: 50 }} p="md" style={{ display: 'flex', alignItems: 'center',
               height: '100%', justifyContent: "space-between" }}>
               <Group p="0">
+                {/* Выводит бургер, если панель уже SM */}
                 <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
                   <Burger
                     opened={opened}
@@ -55,11 +65,14 @@ const App = () => {
                     mr="0"
                   />
                 </MediaQuery>
+                {/* Логотип ПРБР */}
                 <ActionIcon variant="transparent" component={Link} to="/">
                   <Image src={logoC} radius="md" />
                 </ActionIcon>
+                {/* Заголовок */}
                 <Text>Приложение ПРБР</Text>
               </Group>
+              {/* Переключатель светлой/темной темы*/}
               <Group>
                 <Switch
                   checked={colorScheme === 'dark'}
@@ -75,7 +88,9 @@ const App = () => {
         >
           {/*Основной блок*/}
           <Routes>
+            {/* Дайджест */}
             <Route path={"/"} element={<Digest />} />
+            {/* Заглушки */}
             <Route path={"/link1"} element={<Link1 />} />
             <Route path={"/link2"} element={<Link2 />} />
           </Routes>
