@@ -48,7 +48,7 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
 
   // Получает комментарии из стора
   const comments = useAppSelector((state) =>
-      state.digestComment.comments
+      state.digestComments.comments
     );
 
   return (

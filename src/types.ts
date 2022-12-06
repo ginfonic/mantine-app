@@ -8,3 +8,13 @@ export interface IDigestComment {
   date: Date,
   text: string
 }
+// Тип плюсов дайджеста
+export interface IDigestPlus {
+  id: string,
+  value: number
+}
+// Тип минусов дайджеста
+export interface IDigestMinus {
+  id: string,
+  value: number
+}

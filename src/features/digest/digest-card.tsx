@@ -3,10 +3,12 @@ import {FC, useState} from "react";
 import {Group, Card, Image, Text, Badge, ActionIcon} from "@mantine/core";
 import {IconThumbUp, IconThumbDown, IconMessage, IconCalendarEvent} from "@tabler/icons";
 // Хук получения данных из стора
-import {useAppSelector} from '../../store/hooks';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
 
 // Компонент секции комментариев дайджеста
 import DigestCommentSection from "./digest-comment-section";
+import {addPlus} from "../../store/digest-plus-slice";
+import {addMinus} from "../../store/digest-minus-slice";
 
 // Тип пропсов карточки дайджеста
 interface DigestCardProps {
@@ -24,13 +26,26 @@ const DigestCard: FC<DigestCardProps> = (props) => {
   // Стейт открытой/закрытой секции комментариев
   const [commentsOpened, setCommentsOpened] = useState<boolean>(false);
 
+  // // Получает число плюсов из стора
+  // const plusNum =
+  //   useAppSelector((state) => state.digestPlus.plus);
+  // // Получает число минусов из стора
+  // const minusNum =
+  //   useAppSelector((state) => state.digestMinus.minus);
   // Получает число комментариев из стора
   const commentsNum =
     useAppSelector((state) =>
-      state.digestComment.comments
+      state.digestComments.comments
     )?.filter((comment) =>
       comment.cardId === props.id
     ).length;
+
+  // Функция отправки данных в стор
+  const dispatch = useAppDispatch();
+  // // Обработчик добавления плюса
+  // const incPlusHandler = () => dispatch(addPlus(props.id));
+  // // Обработчик добавления минуса
+  // const incMinusHandler = () => dispatch(addMinus());
 
   return (
     // Карточка
@@ -68,17 +83,35 @@ const DigestCard: FC<DigestCardProps> = (props) => {
           <Group>
             {/* Палец вверх */}
             <Group pr="xs">
-              <ActionIcon size="xs" variant="transparent" px={0} mx={0}>
+              <ActionIcon
+                size="xs" variant="transparent" px={0} mx={0}
+                // onClick={() => incPlusHandler()}
+              >
                 <IconThumbUp size={16} stroke={1.5} />
               </ActionIcon>
-              <Badge size="xs" variant="filled" px={0} mx={-10} sx={{ width: 16, height: 16, padding: 0 }}> 99 </Badge>
+              {/* Число плюсов */}
+              <Badge
+                size="xs" variant="filled" px={0} mx={-10}
+                sx={{ width: 16, height: 16, padding: 0 }}
+              >
+                {/*{plusNum}*/}
+              </Badge>
             </Group>
             {/* Палец вниз */}
             <Group pr="xs">
-              <ActionIcon size="xs" variant="transparent" px={0} mx={0}>
+              <ActionIcon
+                size="xs" variant="transparent" px={0} mx={0}
+                // onClick={() => incMinusHandler()}
+              >
                 <IconThumbDown size={16} stroke={1.5} />
               </ActionIcon>
-              <Badge size="xs" variant="filled" px={0} mx={-10} sx={{ width: 16, height: 16, padding: 0 }}> 24 </Badge>
+              {/* Число минусов */}
+              <Badge
+                size="xs" variant="filled" px={0} mx={-10}
+                sx={{ width: 16, height: 16, padding: 0 }}
+              >
+                {/*{minusNum}*/}
+              </Badge>
             </Group>
             {/* Кнопка показа комментариев */}
             <Group pr="xs">
