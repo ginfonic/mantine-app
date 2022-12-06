@@ -3,7 +3,7 @@
 // Тип комментариев дайджеста
 export interface IDigestComment {
   id: string,
-  cardId: string,
+  articleId: string,
   author: string,
   date: Date,
   text: string
@@ -17,4 +17,17 @@ export interface IDigestPlus {
 export interface IDigestMinus {
   id: string,
   value: number
+}
+
+// Тип статьи дайджеста
+export interface IDigestArticle {
+  id: string,
+  title: string,
+  text: string,
+  link: string,
+  date: Date,
+  picture: string,
+  pros: number,
+  cons: number,
+  comments: IDigestComment[]
 }

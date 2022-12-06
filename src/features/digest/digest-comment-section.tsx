@@ -14,7 +14,7 @@ import {addComment} from "../../store/digest-comment-slice";
 import DigestCommentItem from "./digest-comment-item";
 
 // Тип пропсов секции комментариев дайджеста
-interface DigestCommentSectionProps { cardId: string }
+interface DigestCommentSectionProps { articleId: string }
 
 // Компонент
 const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
@@ -28,9 +28,9 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
     const comment: IDigestComment = {
       // Генерирует айди комментария
       id: uuidv4(),
-      // На входе айди карточки с новостью
-      cardId: id,
-      // Авттор - пока дамми
+      // Получает из пропса айди статьи с новостью
+      articleId: id,
+      // Автор - пока дамми
       author: 'Иван Иванович Иванов',
       // Текузая дата
       date: new Date(),
@@ -66,14 +66,14 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
             variant="transparent"
             sx={{alignItems: "flex-end"}}
             // px={0} mx={0} py={5}
-            onClick={() => { addCommentHandler(props.cardId); }}
+            onClick={() => { addCommentHandler(props.articleId); }}
           >
             <IconCheck size={16} stroke={1.5} />
           </ActionIcon>
         }
       />
       {/* Выводит комментарии, относящиеся к карточке текущей статьи */}
-      {comments?.filter((comment) => comment.cardId === props.cardId
+      {comments?.filter((comment) => comment.articleId === props.articleId
         )?.map((comment) =>
           <DigestCommentItem
             id={comment.id}
