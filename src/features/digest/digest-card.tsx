@@ -2,6 +2,8 @@
 import {FC, useState} from "react";
 import {Group, Card, Image, Text, Badge, ActionIcon} from "@mantine/core";
 import {IconThumbUp, IconThumbDown, IconMessage, IconCalendarEvent} from "@tabler/icons";
+// Хук получения данных из стора
+import {useAppSelector} from '../../store/hooks';
 
 // Компонент секции комментариев дайджеста
 import DigestCommentSection from "./digest-comment-section";
@@ -21,6 +23,14 @@ const DigestCard: FC<DigestCardProps> = (props) => {
   const pictureDummy: string = "https://lost-car-keys-replacement.com/wp-content/uploads/No-image-yet-for-this-key-coming-soon-1536x1229.jpg";
   // Стейт открытой/закрытой секции комментариев
   const [commentsOpened, setCommentsOpened] = useState<boolean>(false);
+
+  // Получает число комментариев из стора
+  const commentsNum =
+    useAppSelector((state) =>
+      state.digestComment.comments
+    )?.filter((comment) =>
+      comment.cardId === props.id
+    ).length;
 
   return (
     // Карточка
@@ -80,7 +90,13 @@ const DigestCard: FC<DigestCardProps> = (props) => {
               >
                 <IconMessage size={16} stroke={1.5} />
               </ActionIcon>
-              <Badge size="xs" variant="filled" px={0} mx={-10} sx={{ width: 16, height: 16, padding: 0 }}> 2 </Badge>
+              {/* Число комментариев */}
+              <Badge
+                size="xs" variant="filled" px={0} mx={-10}
+                sx={{ width: 16, height: 16, padding: 0 }}
+              >
+                {commentsNum}
+              </Badge>
             </Group>
           </Group>
           {/* Правая часть - дата*/}

@@ -1,6 +1,8 @@
 // Страница дайджеста
 import {FC} from "react";
 import {Grid} from "@mantine/core";
+import {v4 as uuidv4} from 'uuid';
+
 // Компонент карточки дайджеста
 import DigestCard from "../features/digest/digest-card";
 // Данные для заполнения
@@ -11,9 +13,9 @@ const Digest: FC = () => {
   return (
     <Grid>
       {/* Выводит данные из массива */}
-      {digestSample.map((item) => (
+      {digestSample?.map((item) => (
         // Сетка
-        <Grid.Col lg={12} xl={6}>
+        <Grid.Col lg={12} xl={6} key={uuidv4()}>
           {/* Карточка статьи */}
           <DigestCard
             id={item.id}

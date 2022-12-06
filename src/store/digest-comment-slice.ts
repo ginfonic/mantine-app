@@ -1,14 +1,8 @@
 // Слайс стора Redux для комментариев дайджеста
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+// Тип комментариев дайджеста
+import {IDigestComment} from '../types';
 
-//Тип комментариев дайджеста
-export interface IDigestComment {
-  id: string,
-  cardId: string,
-  author: string,
-  date: Date,
-  text: string
-}
 // Начальное состояние слайса комментариев дайджеста
 const initialState: { comments: IDigestComment[] } = {comments: []}
 
@@ -29,4 +23,5 @@ const digestCommentSlice = createSlice({
 
 // Экспортирует редюсеры с экшенами
 export const {addComment, removeComment} = digestCommentSlice.actions;
+// Импортируется в сторе как digestCommentReducer
 export default digestCommentSlice.reducer;

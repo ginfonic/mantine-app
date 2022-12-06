@@ -1,7 +1,7 @@
 // Компонент панели навигации
 import {FC, useState} from "react";
 import {Link} from "react-router-dom";
-import {Navbar, NavLink, ScrollArea, Badge, ActionIcon} from "@mantine/core";
+import {Navbar, NavLink, ScrollArea, Badge} from "@mantine/core";
 // import {MantineNumberSize} from "@mantine/styles";
 import {
   IconDirections, IconShoppingCart, IconBook, IconBooks, IconBox, IconBrandTabler,
@@ -15,7 +15,7 @@ import {
   IconZoomExclamation, IconCheese, IconBuildingCommunity, IconColorFilter,
   IconCone, IconArrowAutofitContent, Icon3dCubeSphere, IconPresentation, IconDeviceTvOld,
   IconUsers, IconMasksTheater, IconTextPlus, IconAdjustments, IconBrandLaravel,
-  IconAddressBook, IconPaperclip, IconMailForward, IconArrowsTransferDown, IconSettings
+  IconAddressBook, IconPaperclip, IconMailForward, IconArrowsTransferDown
 } from "@tabler/icons";
 
 // Тип пропсов элементов навигации (для вывода элементов из массива)
@@ -181,11 +181,11 @@ const NavigationBar: FC<NavigationBarProps> = ({hidden, useSubIcons= true}) => {
         <NavLink
           label="КУБ"
           icon={<IconBox size={16} stroke={1.5}/>}
-          rightSection={
-            <ActionIcon size="xs" variant="transparent" component={Link} to="/link2">
-              <IconSettings size={16} stroke={1.5} />
-            </ActionIcon>
-          }
+          // rightSection={
+          //   <ActionIcon size="xs" variant="transparent" component={Link} to="/link2">
+          //     <IconSettings size={16} stroke={1.5} />
+          //   </ActionIcon>
+          // }
           component={Link}
           to="/link1"
           active={5 === active}

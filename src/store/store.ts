@@ -1,11 +1,11 @@
 // Стор Redux
 import { configureStore } from '@reduxjs/toolkit';
-import digestCommentSlice from './digest-comment-slice';
+import digestCommentReducer from './digest-comment-slice';
 
 // Стор Redux
 export const store = configureStore({
   reducer: {
-    digestComment: digestCommentSlice
+    digestComment: digestCommentReducer
   }
 });
 export default store;

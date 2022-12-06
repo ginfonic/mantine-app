@@ -4,10 +4,12 @@ import {ActionIcon, Textarea} from "@mantine/core";
 import {IconCheck} from "@tabler/icons";
 import {v4 as uuidv4} from 'uuid';
 
-// Хук добавления данных
+// Тип комментариев дайджеста
+import {IDigestComment} from '../../types';
+// Хуки добавления и получения данных из стора
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 // Редюсер добавления комментария и его тип
-import {addComment, IDigestComment} from "../../store/digest-comment-slice";
+import {addComment} from "../../store/digest-comment-slice";
 // Компонент одного комментария дайджеста
 import DigestCommentItem from "./digest-comment-item";
 
@@ -44,10 +46,9 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
     }
   }
 
-  // Получает комментарии из стора и фильтрует их по принадлежности к карточке текущей статьи
-  const comments: IDigestComment[] =
-    useAppSelector((state) =>
-      state.digestComment.comments?.filter((comment) => comment.cardId === props.cardId)
+  // Получает комментарии из стора
+  const comments = useAppSelector((state) =>
+      state.digestComment.comments
     );
 
   return (
@@ -71,15 +72,17 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
           </ActionIcon>
         }
       />
-      {/* Выводит комментарии */}
-      {comments?.map((comment) => (
-        <DigestCommentItem
-          id={comment.id}
-          author={comment.author}
-          date={comment.date}
-          text={comment.text}
-        />
-      ))}
+      {/* Выводит комментарии, относящиеся к карточке текущей статьи */}
+      {comments?.filter((comment) => comment.cardId === props.cardId
+        )?.map((comment) =>
+          <DigestCommentItem
+            id={comment.id}
+            author={comment.author}
+            date={comment.date}
+            text={comment.text}
+          />
+        )
+      }
     </>
   );
 }
