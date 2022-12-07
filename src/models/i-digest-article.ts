@@ -1,12 +1,13 @@
 // Тип статьи дайджеста
-import {IDigestComment} from "./i-digest-comment";
 import {IDigestVote} from './i-digest-vote'
+import {IDigestComment} from "./i-digest-comment";
+
 export interface IDigestArticle {
   id: string,
   title: string,
   text: string,
   link: string,
-  date: Date,
+  date: string,
   picture: string,
   pros: IDigestVote[],
   cons: IDigestVote[],

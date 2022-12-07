@@ -1,7 +1,9 @@
 // Тип комментариев дайджеста
+import {IUser} from "./i-user";
+
 export interface IDigestComment {
   id: string,
-  author: string,
-  date: Date,
+  creator: IUser,
+  date: string,
   text: string
 }

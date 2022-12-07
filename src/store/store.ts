@@ -1,17 +1,12 @@
 // Стор Redux
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
+import userReducer from './reducers/user-slice';
 import digestArticleReducer from './reducers/digest-article-slice';
-import digestCommentReducer from './reducers/digest-comment-slice';
-import digestPlusReducer from './reducers/digest-plus-slice';
-import digestMinusReducer from './reducers/digest-minus-slice';
 
-// Стор Redux
 export const store = configureStore({
   reducer: {
-    digestArticles: digestArticleReducer,
-    digestComments: digestCommentReducer,
-    digestPlus: digestPlusReducer,
-    digestMinus: digestMinusReducer
+    currentUser: userReducer,
+    digestArticles: digestArticleReducer
   }
 });
 export default store;

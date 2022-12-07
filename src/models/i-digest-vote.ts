@@ -1,6 +1,8 @@
 // Тип голосования дайджеста
+import {IUser} from "./i-user";
+
 export interface IDigestVote {
   id: string,
-  author: string,
-  date: Date
+  creator: IUser,
+  date: string
 }

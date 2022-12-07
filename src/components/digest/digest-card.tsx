@@ -2,50 +2,79 @@
 import {FC, useState} from "react";
 import {Group, Card, Image, Text, Badge, ActionIcon} from "@mantine/core";
 import {IconThumbUp, IconThumbDown, IconMessage, IconCalendarEvent} from "@tabler/icons";
+import {v4 as uuidv4} from "uuid";
+
 // Хук получения данных из стора
 import {useAppDispatch, useAppSelector} from '../../hooks/redux';
-
 // Компонент секции комментариев дайджеста
 import DigestCommentSection from "./digest-comment-section";
-import {addPlus} from "../../store/reducers/digest-plus-slice";
-import {addMinus} from "../../store/reducers/digest-minus-slice";
+// Тип статьи дайджеста
+import {IDigestArticle} from "../../models/i-digest-article";
+// Тип голосования дайджеста
+import {IDigestVote} from "../../models/i-digest-vote";
+// Редюсеры переключения голосования за и против
+import {togglePro, toggleCon} from "../../store/reducers/digest-article-slice";
 
-// Тип пропсов карточки дайджеста
-interface DigestCardProps {
-  id: string;
-  picture?: string;
-  title?: string;
-  text: string;
-  link?: string;
-}
+// Тип пропсов карточки дайджеста: тип статьи дайджеста
+interface DigestCardProps { article: IDigestArticle }
 
 // Компонент
-const DigestCard: FC<DigestCardProps> = (props) => {
+const DigestCard: FC<DigestCardProps> = ({article}) => {
   // Заглушка отсутствующих фотографий
   const pictureDummy: string = "https://lost-car-keys-replacement.com/wp-content/uploads/No-image-yet-for-this-key-coming-soon-1536x1229.jpg";
   // Стейт открытой/закрытой секции комментариев
   const [commentsOpened, setCommentsOpened] = useState<boolean>(false);
 
-  // // Получает число плюсов из стора
-  // const plusNum =
-  //   useAppSelector((state) => state.digestPlus.plus);
-  // // Получает число минусов из стора
-  // const minusNum =
-  //   useAppSelector((state) => state.digestMinus.minus);
+  // Получение их стора
+  // Получает текущего пользователя из стора
+  const user = useAppSelector((state) =>
+    state.currentUser.user
+  );
   // Получает число комментариев из стора
-  const commentsNum =
-    useAppSelector((state) =>
-      state.digestComments.comments
-    )?.filter((comment) =>
-      comment.articleId === props.id
-    ).length;
+  const commentsNum = useAppSelector((state) =>
+      state.digestArticles.articles
+    )?.find(item => item.id === article.id
+    )?.comments.length;
+  // Получает число голосов за из стора
+  const prosNum = useAppSelector((state) =>
+      state.digestArticles.articles
+    )?.find(item => item.id === article.id
+    )?.pros.length;
+  // Получает число голосов против из стора
+  const consNum = useAppSelector((state) =>
+      state.digestArticles.articles
+    )?.find(item => item.id === article.id
+    )?.cons.length;
 
+  // Отправка в стор
   // Функция отправки данных в стор
   const dispatch = useAppDispatch();
-  // // Обработчик добавления плюса
-  // const incPlusHandler = () => dispatch(addPlus(props.id));
-  // // Обработчик добавления минуса
-  // const incMinusHandler = () => dispatch(addMinus());
+  //Обработчик переключения голоса за
+  const toggleProHandler = () => {
+    // Заполняет голос
+    const vote: IDigestVote = {
+      // Генерирует айди голоса
+      id: uuidv4(),
+      // Создатель
+      creator: {id: user.id, name: user.name},
+      // Текущая дата
+      date: new Date().toLocaleString(),
+    }
+    dispatch(togglePro({article: article, vote: vote}));
+  }
+  //Обработчик переключения голоса против
+  const toggleConHandler = () => {
+    // Заполняет голос
+    const vote: IDigestVote = {
+      // Генерирует айди голоса
+      id: uuidv4(),
+      // Создатель
+      creator: {id: user.id, name: user.name},
+      // Текущая дата
+      date: new Date().toLocaleString(),
+    }
+    dispatch(toggleCon({article: article, vote: vote}));
+  }
 
   return (
     // Карточка
@@ -53,7 +82,7 @@ const DigestCard: FC<DigestCardProps> = (props) => {
       {/* Картинка */}
       <Card.Section>
         <Image
-          src={((props.picture === undefined) || (props.picture === "")) ? pictureDummy : props.picture}
+          src={((article.picture === undefined) || (article.picture === "")) ? pictureDummy : article.picture}
           height={160}
           alt="Нет фото"
         />
@@ -62,7 +91,7 @@ const DigestCard: FC<DigestCardProps> = (props) => {
       <Card.Section inheritPadding>
         <Group position="apart" mt="md" mb="xs">
           {/* Заголовок */}
-          <Text weight={500} color="blue">{props.title}</Text>
+          <Text weight={500} color="blue">{article.title}</Text>
           {/* Бейдж */}
           <Badge color="red" variant="light">
             Новое
@@ -72,45 +101,45 @@ const DigestCard: FC<DigestCardProps> = (props) => {
       {/* Текст */}
       <Card.Section inheritPadding>
         <Text size="sm" color="dimmed" mb="sm">
-          {props.text}
+          {article.text}
         </Text>
       </Card.Section>
       {/* Подвал с кнопками*/}
       <Card.Section inheritPadding>
         {/* Линейка кнопок */}
         <Group position="apart" >
-          {/* Левая часть - пальцы и кнопка показа комментариев */}
+          {/* Левая часть: голосование и кнопка показа комментариев */}
           <Group>
             {/* Палец вверх */}
             <Group pr="xs">
               <ActionIcon
                 size="xs" variant="transparent" px={0} mx={0}
-                // onClick={() => incPlusHandler()}
+                onClick={() => toggleProHandler()}
               >
                 <IconThumbUp size={16} stroke={1.5} />
               </ActionIcon>
-              {/* Число плюсов */}
+              {/* Число голосов за */}
               <Badge
                 size="xs" variant="filled" px={0} mx={-10}
                 sx={{ width: 16, height: 16, padding: 0 }}
               >
-                {/*{plusNum}*/}
+                {prosNum}
               </Badge>
             </Group>
             {/* Палец вниз */}
             <Group pr="xs">
               <ActionIcon
                 size="xs" variant="transparent" px={0} mx={0}
-                // onClick={() => incMinusHandler()}
+                onClick={() => toggleConHandler()}
               >
                 <IconThumbDown size={16} stroke={1.5} />
               </ActionIcon>
-              {/* Число минусов */}
+              {/* Число голосов против */}
               <Badge
                 size="xs" variant="filled" px={0} mx={-10}
                 sx={{ width: 16, height: 16, padding: 0 }}
               >
-                {/*{minusNum}*/}
+                {consNum}
               </Badge>
             </Group>
             {/* Кнопка показа комментариев */}
@@ -143,7 +172,7 @@ const DigestCard: FC<DigestCardProps> = (props) => {
       </Card.Section>
       {/* Комментарии */}
       <Card.Section inheritPadding pb="md" mt="md" hidden={!commentsOpened}>
-        <DigestCommentSection articleId={props.id}/>
+        <DigestCommentSection article={article}/>
       </Card.Section>
     </Card>
   );
