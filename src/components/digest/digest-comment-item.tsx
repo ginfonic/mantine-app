@@ -3,6 +3,8 @@ import {FC} from "react";
 import {ActionIcon, Avatar, Code, Group, Text} from "@mantine/core";
 import {IconTrash} from "@tabler/icons";
 
+// Получает инициалы из имени
+import {getInitials} from '../../assets/snippets'
 // Тип комментария дайджеста
 import {IDigestComment} from "../../models/i-digest-comment";
 import {IDigestArticle} from "../../models/i-digest-article";
@@ -33,7 +35,7 @@ const DigestCommentItem: FC<DigestCommentItemProps> = ({article, comment}) => {
       <Group position="apart">
         {/* Левая часть */}
         <Group p="xs" mb={-20}>
-          <Avatar color="blue" size={24} radius="xl" ml={-10}>ИИ</Avatar>
+          <Avatar color="blue" size={24} radius="xl" ml={-10}>{getInitials(comment.creator.name)}</Avatar>
           {/*<Badge size="xs" variant="filled" ml={-10} sx={{ width: 16, height: 16, padding: 0}}>Ф</Badge>*/}
           <Text size="xs" fw={700} color="blue" ml={-5}>{comment.creator.name}</Text>
           <Text size="xs" color="dimmed" mx={-5}>{comment.date}</Text>

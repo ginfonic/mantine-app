@@ -25,7 +25,7 @@ const DigestCard: FC<DigestCardProps> = ({article}) => {
   // Стейт открытой/закрытой секции комментариев
   const [commentsOpened, setCommentsOpened] = useState<boolean>(false);
 
-  // Получение их стора
+  // Получение из стора
   // Получает текущего пользователя из стора
   const user = useAppSelector((state) =>
     state.currentUser.user
