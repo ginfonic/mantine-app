@@ -54,7 +54,7 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = ({article}) => {
     // Если комментарий содержит что-то
     if (commentValue) {
       // Добавляет комментарий в стор
-      dispatch(addComment({article: article, comment: comment}));
+      dispatch(addComment([article, comment]));
       // Чистит форму
       setCommentValue('');
     }

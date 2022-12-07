@@ -60,7 +60,7 @@ const DigestCard: FC<DigestCardProps> = ({article}) => {
       // Текущая дата
       date: new Date().toLocaleString(),
     }
-    dispatch(togglePro({article: article, vote: vote}));
+    dispatch(togglePro([article, vote]));
   }
   //Обработчик переключения голоса против
   const toggleConHandler = () => {
@@ -73,7 +73,7 @@ const DigestCard: FC<DigestCardProps> = ({article}) => {
       // Текущая дата
       date: new Date().toLocaleString(),
     }
-    dispatch(toggleCon({article: article, vote: vote}));
+    dispatch(toggleCon([article, vote]));
   }
 
   return (

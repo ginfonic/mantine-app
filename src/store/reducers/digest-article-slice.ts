@@ -9,17 +9,6 @@ import {IDigestArticle} from '../../models/i-digest-article';
 // Тестовые данные для заполнения массива статей
 import digestSample from "../../assets/sample-digest.json";
 
-// Тип объекта: статья, голос
-interface IDigestArticleVote {
-  article: IDigestArticle,
-  vote: IDigestVote
-}
-// Тип объекта: статья, комментарий
-interface IDigestArticleComment {
-  article: IDigestArticle,
-  comment: IDigestComment
-}
-
 // Тип начального состояния статьи дайджеста
 interface IDigestArticleState {
   articles: IDigestArticle[]
@@ -54,45 +43,49 @@ const digestArticleSlice = createSlice({
       state.articles = state.articles.filter((article) => article.id !== action.payload)
     },
     // Редюсер изменения голоса за
-    togglePro: (state, action: PayloadAction<IDigestArticleVote>) => {
+    togglePro: (state, action: PayloadAction<[IDigestArticle, IDigestVote]>) => {
+      const [plArticle, plVote] = action.payload;
       // Текущая статья
-      let currentArticle = state.articles.find(article => article.id === action.payload.article.id);
+      let currentArticle = state.articles.find(article => article.id === plArticle.id);
       // Если уже есть голос за эту статью
-      if(currentArticle?.pros?.find(vote => vote.creator.id === action.payload.vote.creator.id)) {
+      if(currentArticle?.pros?.find(vote => vote.creator.id === plVote.creator.id)) {
         // Сбрасывает его
-        currentArticle.pros = currentArticle.pros.filter((vote) => vote.creator.id !== action.payload.vote.creator.id)
+        currentArticle.pros = currentArticle.pros.filter((vote) => vote.creator.id !== plVote.creator.id)
       }
       else {
         // Иначе устанавливает его
-        currentArticle?.pros?.push(action.payload.vote)
+        currentArticle?.pros?.push(plVote)
       }
     },
     // Редюсер изменения голоса против
-    toggleCon: (state, action: PayloadAction<IDigestArticleVote>) => {
+    toggleCon: (state, action: PayloadAction<[IDigestArticle, IDigestVote]>) => {
+      const [plArticle, plVote] = action.payload;
       // Текущая статья
-      let currentArticle = state.articles.find(article => article.id === action.payload.article.id);
+      let currentArticle = state.articles.find(article => article.id === plArticle.id);
       // Если уже есть голос против этой статьи
-      if(currentArticle?.cons?.find(vote => vote.creator.id === action.payload.vote.creator.id)) {
+      if(currentArticle?.cons?.find(vote => vote.creator.id === plVote.creator.id)) {
         // Сбрасывает его
-        currentArticle.cons = currentArticle.cons.filter((vote) => vote.creator.id !== action.payload.vote.creator.id)
+        currentArticle.cons = currentArticle.cons.filter((vote) => vote.creator.id !== plVote.creator.id)
       }
       else {
         // Иначе устанавливает его
-        currentArticle?.cons?.push(action.payload.vote)
+        currentArticle?.cons?.push(plVote)
       }
     },
     // Редюсер добавления комментария
-    addComment: (state, action: PayloadAction<IDigestArticleComment>) => {
-      state.articles.find(article => article.id === action.payload.article.id)?.comments.push(action.payload.comment);
+    addComment: (state, action: PayloadAction<[IDigestArticle, IDigestComment]>) => {
+      const [plArticle, plComment] = action.payload;
+      state.articles.find(article => article.id === plArticle.id)?.comments.push(plComment);
     },
     // Редюсер удаления комментария
-    removeComment: (state, action: PayloadAction<IDigestArticleComment>) => {
+    removeComment: (state, action: PayloadAction<[IDigestArticle, IDigestComment]>) => {
+      const [plArticle, plComment] = action.payload;
       // Текущая статья
-      let currentArticle = state.articles.find(article => article.id === action.payload.article.id);
+      let currentArticle = state.articles.find(article => article.id === plArticle.id);
       // Если есть комментарии
       if(currentArticle?.comments) {
         // Удаляет выбранный комментарий
-        currentArticle.comments = currentArticle.comments.filter((comment) => comment.id !== action.payload.comment.id);
+        currentArticle.comments = currentArticle.comments.filter((comment) => comment.id !== plComment.id);
       }
     }
   }

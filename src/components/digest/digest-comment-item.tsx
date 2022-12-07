@@ -26,7 +26,7 @@ const DigestCommentItem: FC<DigestCommentItemProps> = ({article, comment}) => {
   //Обработчик удаления комментария
   const removeCommentHandler = () => {
     // Удаляет комментарий
-    dispatch(removeComment({article: article, comment: comment}));
+    dispatch(removeComment([article, comment]));
   }
 
   return (
