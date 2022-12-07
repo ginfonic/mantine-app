@@ -5,11 +5,11 @@ import {IconCheck} from "@tabler/icons";
 import {v4 as uuidv4} from 'uuid';
 
 // Тип комментариев дайджеста
-import {IDigestComment} from '../../types';
+import {IDigestCommentAlt} from '../../models/types';
 // Хуки добавления и получения данных из стора
-import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/redux';
 // Редюсер добавления комментария и его тип
-import {addComment} from "../../store/digest-comment-slice";
+import {addComment} from "../../store/reducers/digest-comment-slice";
 // Компонент одного комментария дайджеста
 import DigestCommentItem from "./digest-comment-item";
 
@@ -25,7 +25,7 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = (props) => {
   //Обработчик добавления комментария
   const addCommentHandler = (id: string) => {
     // Заполняет комментарий
-    const comment: IDigestComment = {
+    const comment: IDigestCommentAlt = {
       // Генерирует айди комментария
       id: uuidv4(),
       // Получает из пропса айди статьи с новостью

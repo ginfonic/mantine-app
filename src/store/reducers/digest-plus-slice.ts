@@ -1,7 +1,7 @@
 // Слайс стора Redux для плюсов дайджеста
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 // Тип плюса дайджеста
-import {IDigestPlus} from "../types";
+import {IDigestPlus} from "../../models/types";
 
 // Начальное состояние слайса плюсов дайджеста
 const initialState: { pluses: IDigestPlus[] } = {pluses: []}

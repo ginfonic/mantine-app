@@ -3,12 +3,12 @@ import {FC, useState} from "react";
 import {Group, Card, Image, Text, Badge, ActionIcon} from "@mantine/core";
 import {IconThumbUp, IconThumbDown, IconMessage, IconCalendarEvent} from "@tabler/icons";
 // Хук получения данных из стора
-import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/redux';
 
 // Компонент секции комментариев дайджеста
 import DigestCommentSection from "./digest-comment-section";
-import {addPlus} from "../../store/digest-plus-slice";
-import {addMinus} from "../../store/digest-minus-slice";
+import {addPlus} from "../../store/reducers/digest-plus-slice";
+import {addMinus} from "../../store/reducers/digest-minus-slice";
 
 // Тип пропсов карточки дайджеста
 interface DigestCardProps {

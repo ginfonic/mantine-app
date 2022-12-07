@@ -10,7 +10,7 @@ import logoC from './assets/prbr-logo-c.svg';
 // import logoBW from './prbr-logo-bw.svg';
 
 // Компонент панели навигации
-import NavigationBar from './features/navigation-bar';
+import NavigationBar from './components/navigation-bar';
 // Страницы-заглушки
 import Link1 from "./pages/link-1";
 import Link2 from "./pages/link-2";

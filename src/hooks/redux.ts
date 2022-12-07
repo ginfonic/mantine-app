@@ -1,6 +1,6 @@
 // Хуки стора Redux
 import {useDispatch, useSelector, TypedUseSelectorHook} from 'react-redux';
-import type {RootState, AppDispatch} from './store';
+import type {RootState, AppDispatch} from '../store/store';
 
 // Хуки, использующие типы из стора Redux
 export const useAppDispatch = () => useDispatch<AppDispatch>();

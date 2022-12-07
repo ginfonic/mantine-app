@@ -1,12 +1,14 @@
 // Стор Redux
 import { configureStore } from '@reduxjs/toolkit';
-import digestCommentReducer from './digest-comment-slice';
-import digestPlusReducer from './digest-plus-slice';
-import digestMinusReducer from './digest-minus-slice';
+import digestArticleReducer from './reducers/digest-article-slice';
+import digestCommentReducer from './reducers/digest-comment-slice';
+import digestPlusReducer from './reducers/digest-plus-slice';
+import digestMinusReducer from './reducers/digest-minus-slice';
 
 // Стор Redux
 export const store = configureStore({
   reducer: {
+    digestArticles: digestArticleReducer,
     digestComments: digestCommentReducer,
     digestPlus: digestPlusReducer,
     digestMinus: digestMinusReducer

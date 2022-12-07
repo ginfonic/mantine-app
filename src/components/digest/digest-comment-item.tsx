@@ -3,9 +3,9 @@ import {FC} from "react";
 import {ActionIcon, Avatar, Code, Group, Text} from "@mantine/core";
 import {IconTrash} from "@tabler/icons";
 // Хук добавления данных
-import {useAppDispatch} from '../../store/hooks';
+import {useAppDispatch} from '../../hooks/redux';
 // Редюсер удаления комментария
-import {removeComment} from '../../store/digest-comment-slice';
+import {removeComment} from '../../store/reducers/digest-comment-slice';
 
 // Тип пропсов компонента одного комментария
 interface DigestCommentItemProps {
