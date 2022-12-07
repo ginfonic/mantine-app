@@ -16,7 +16,7 @@ interface IDigestArticleState {
 // Начальное состояние статьи дайджеста из тестовых данных
 const initialState: IDigestArticleState = {articles: []}
 digestSample?.map(item => {
-  let article: IDigestArticle = {
+  initialState.articles.push({
     id: uuidv4(),
     title: item.title,
     text: item.text,
@@ -26,8 +26,7 @@ digestSample?.map(item => {
     pros: [],
     cons: [],
     comments: []
-  }
-  initialState.articles.push(article)
+  })
 })
 
 const digestArticleSlice = createSlice({
