@@ -15,7 +15,7 @@ import {
   IconZoomExclamation, IconCheese, IconBuildingCommunity, IconColorFilter,
   IconCone, IconArrowAutofitContent, Icon3dCubeSphere, IconPresentation, IconDeviceTvOld,
   IconUsers, IconMasksTheater, IconTextPlus, IconAdjustments, IconBrandLaravel,
-  IconAddressBook, IconPaperclip, IconMailForward, IconArrowsTransferDown
+  IconAddressBook, IconPaperclip, IconMailForward, IconArrowsTransferDown, IconFileText
 } from "@tabler/icons";
 
 // Тип пропсов элементов навигации (для вывода элементов из массива)
@@ -417,7 +417,7 @@ const NavigationBar: FC<NavigationBarProps> = ({hidden, useSubIcons= true}) => {
             component={Link}
             to="/link1"
             active={1220 === active}
-            onClick={() => setActive(1210)}
+            onClick={() => setActive(1220)}
           />
           <NavLink
             label="Темы встреч"
@@ -531,6 +531,14 @@ const NavigationBar: FC<NavigationBarProps> = ({hidden, useSubIcons= true}) => {
           to="/link2"
           active={15 === active}
           onClick={() => setActive(15)}
+        />
+        <NavLink
+          label="Просмотр PDF"
+          icon={<IconFileText size={16} stroke={1.5}/>}
+          component={Link}
+          to="/pdf"
+          active={16 === active}
+          onClick={() => setActive(16)}
         />
       </ScrollArea>
     </Navbar>

@@ -16,6 +16,8 @@ import Link1 from "./pages/link-1";
 import Link2 from "./pages/link-2";
 // Страница дайджеста
 import Digest from "./pages/digest";
+// Страница просмотровщика PDF
+import PdfViewer from "./pages/pdf";
 
 // Компонент
 const App = () => {
@@ -93,6 +95,7 @@ const App = () => {
             {/* Заглушки */}
             <Route path={"/link1"} element={<Link1 />} />
             <Route path={"/link2"} element={<Link2 />} />
+            <Route path={"/pdf"} element={<PdfViewer />} />
           </Routes>
         </AppShell>
       </MantineProvider>
