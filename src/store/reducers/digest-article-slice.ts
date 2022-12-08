@@ -91,5 +91,5 @@ const digestArticleSlice = createSlice({
 })
 
 // Экспортирует редюсеры с экшенами
-export const {addArticle, removeArticle, togglePro, toggleCon, addComment, removeComment} = digestArticleSlice.actions;
+export const {/*addArticle, removeArticle, */togglePro, toggleCon, addComment, removeComment} = digestArticleSlice.actions;
 export default digestArticleSlice.reducer;
