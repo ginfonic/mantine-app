@@ -47,7 +47,7 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = ({article}) => {
       // Создатель
       creator: {id: user.id, name: user.name},
       // Текущая дата
-      date: new Date().toLocaleString(),
+      date: new Date().toLocaleString('ru-RU'),
       // Введенный текст комментария
       text: commentValue
     }
@@ -74,12 +74,12 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = ({article}) => {
             size="xs"
             variant="transparent"
             sx={{alignItems: "flex-end"}}
-            px={0} mx={0} py={5}
+            px={0} mx={0} pt={50}
             onClick={() => {
               addCommentHandler();
             }}
           >
-            <IconCheck size={16} stroke={1.5}/>
+            <IconCheck size={16} stroke={1.5} />
           </ActionIcon>
         }
       />

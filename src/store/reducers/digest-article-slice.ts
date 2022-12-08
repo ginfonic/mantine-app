@@ -20,7 +20,7 @@ const initialState: IDigestArticleState = {articles:
         title: item.title,
         text: item.text,
         link: item.link,
-        date: new Date().toLocaleString(),
+        date: new Date().toLocaleDateString('ru-RU'),
         picture: item.picture,
         pros: [],
         cons: [],

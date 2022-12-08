@@ -50,7 +50,7 @@ const DigestFooter: FC<DigestFooterProps> = ({article, toggleCommentsOpened}) =>
       // Создатель
       creator: {id: user.id, name: user.name},
       // Текущая дата
-      date: new Date().toLocaleString(),
+      date: new Date().toLocaleString('ru-RU'),
     }
     dispatch(togglePro([article, vote]));
   }
@@ -63,7 +63,7 @@ const DigestFooter: FC<DigestFooterProps> = ({article, toggleCommentsOpened}) =>
       // Создатель
       creator: {id: user.id, name: user.name},
       // Текущая дата
-      date: new Date().toLocaleString(),
+      date: new Date().toLocaleString('ru-RU'),
     }
     dispatch(toggleCon([article, vote]));
   }
@@ -129,7 +129,7 @@ const DigestFooter: FC<DigestFooterProps> = ({article, toggleCommentsOpened}) =>
         <ActionIcon size="xs" variant="transparent" px={0} mx={0} >
           <IconCalendarEvent size={16} stroke={1.5} />
         </ActionIcon>
-        <Text size="xs" color="dimmed" ml={-10}>21.12.1984</Text>
+        <Text size="xs" color="dimmed" ml={-10}>{article.date}</Text>
       </Group>
     </Group>
   );
