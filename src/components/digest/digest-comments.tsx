@@ -1,4 +1,4 @@
-// Компонент секции комментариев дайджеста
+// Компонент комментариев дайджеста
 import {FC, useState} from "react";
 import {ActionIcon, Textarea} from "@mantine/core";
 import {IconCheck} from "@tabler/icons";
@@ -15,23 +15,18 @@ import {addComment} from "../../store/reducers/digest-article-slice";
 // Компонент комментария дайджеста
 import DigestCommentItem from "./digest-comment-item";
 
-// Тип пропсов секции комментариев дайджеста
-interface DigestCommentSectionProps {
+// Тип пропсов комментариев дайджеста
+interface DigestCommentsProps {
   article: IDigestArticle
 }
 
 // Компонент
-const DigestCommentSection: FC<DigestCommentSectionProps> = ({article}) => {
+const DigestComments: FC<DigestCommentsProps> = ({article}) => {
   // Получение из стора
   // Получает текущего пользователя из стора
   const user = useAppSelector((state) =>
     state.currentUser.user
   );
-  // Получает комментарии из стора
-  const comments = useAppSelector((state) =>
-    state.digestArticles.articles
-  )?.find(item => item.id === article.id
-  )?.comments;
 
   // Отправка в стор
   // Стейт текста комментария
@@ -84,8 +79,8 @@ const DigestCommentSection: FC<DigestCommentSectionProps> = ({article}) => {
         }
       />
       {/* Выводит комментарии */}
-      {comments?.map((comment) => <DigestCommentItem article={article} comment={comment} key={uuidv4()}/>)}
+      {article.comments?.map((comment) => <DigestCommentItem article={article} comment={comment} key={uuidv4()}/>)}
     </>
   );
 }
-export default DigestCommentSection;
+export default DigestComments;

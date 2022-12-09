@@ -5,7 +5,7 @@ import {Group, Card, Image, Text, Badge} from "@mantine/core";
 // Тип статьи дайджеста
 import {IDigestArticle} from "../../models/i-digest-article";
 // Компонент секции комментариев дайджеста
-import DigestCommentSection from "./digest-comment-section";
+import DigestComments from "./digest-comments";
 // Компонент секции подвала дайджеста
 import DigestFooter from "./digest-footer";
 
@@ -57,7 +57,7 @@ const DigestCard: FC<DigestCardProps> = ({article}) => {
       </Card.Section>
       {/* Комментарии */}
       <Card.Section inheritPadding pb="md" mt="md" hidden={!commentsOpened}>
-        <DigestCommentSection article={article}/>
+        <DigestComments article={article}/>
       </Card.Section>
     </Card>
   );

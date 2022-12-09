@@ -24,7 +24,8 @@ const initialState: IDigestArticleState = {articles:
         picture: item.picture,
         pros: [],
         cons: [],
-        comments: []
+        comments: [],
+        commentsOpened: false
       })
     )
   };
