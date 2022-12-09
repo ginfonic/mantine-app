@@ -1,5 +1,6 @@
 // Компонент секции подвала дайджеста
 import {FC} from "react";
+import {ActionCreatorWithPayload} from "@reduxjs/toolkit";
 import {ActionIcon, Badge, Group, Text} from "@mantine/core";
 import {IconCalendarEvent, IconMessage, IconThumbDown, IconThumbUp} from "@tabler/icons";
 import {v4 as uuidv4} from "uuid";
@@ -41,8 +42,9 @@ const DigestFooter: FC<DigestFooterProps> = ({article, toggleCommentsOpened}) =>
   // Отправка в стор
   // Функция отправки данных в стор
   const dispatch = useAppDispatch();
-  //Обработчик переключения голоса за
-  const toggleProHandler = () => {
+  //Обработчик переключения голоса. Аргументом имя редюсера: за или против
+  const toggleVoteHandler =
+    (reducer: ActionCreatorWithPayload<[IDigestArticle, IDigestVote]>) => {
     // Заполняет голос
     const vote: IDigestVote = {
       // Генерирует айди голоса
@@ -52,20 +54,7 @@ const DigestFooter: FC<DigestFooterProps> = ({article, toggleCommentsOpened}) =>
       // Текущая дата
       date: new Date().toLocaleString('ru-RU'),
     }
-    dispatch(togglePro([article, vote]));
-  }
-  //Обработчик переключения голоса против
-  const toggleConHandler = () => {
-    // Заполняет голос
-    const vote: IDigestVote = {
-      // Генерирует айди голоса
-      id: uuidv4(),
-      // Создатель
-      creator: {id: user.id, name: user.name},
-      // Текущая дата
-      date: new Date().toLocaleString('ru-RU'),
-    }
-    dispatch(toggleCon([article, vote]));
+    dispatch(reducer([article, vote]));
   }
 
   return (
@@ -77,7 +66,7 @@ const DigestFooter: FC<DigestFooterProps> = ({article, toggleCommentsOpened}) =>
         <Group pr="xs">
           <ActionIcon
             size="xs" variant="transparent" px={0} mx={0}
-            onClick={() => toggleProHandler()}
+            onClick={() => toggleVoteHandler(togglePro)}
           >
             <IconThumbUp size={16} stroke={1.5} />
           </ActionIcon>
@@ -93,7 +82,7 @@ const DigestFooter: FC<DigestFooterProps> = ({article, toggleCommentsOpened}) =>
         <Group pr="xs">
           <ActionIcon
             size="xs" variant="transparent" px={0} mx={0}
-            onClick={() => toggleConHandler()}
+            onClick={() => toggleVoteHandler(toggleCon)}
           >
             <IconThumbDown size={16} stroke={1.5} />
           </ActionIcon>
