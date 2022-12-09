@@ -4,10 +4,10 @@ import {Group, Card, Image, Text, Badge} from "@mantine/core";
 
 // Тип статьи дайджеста
 import {IDigestArticle} from "../../models/i-digest-article";
-// Компонент секции комментариев дайджеста
-import DigestComments from "./digest-comments";
 // Компонент секции подвала дайджеста
 import DigestFooter from "./digest-footer";
+// Компонент секции комментариев дайджеста
+import DigestComments from "./digest-comments";
 
 // Тип пропсов карточки дайджеста: тип статьи дайджеста
 interface DigestCardProps {
