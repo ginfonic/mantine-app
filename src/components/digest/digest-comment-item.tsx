@@ -30,32 +30,31 @@ const DigestCommentItem: FC<DigestCommentItemProps> = ({article, comment}) => {
   }
 
   return (
-    <Group mb={5}>
+    <>
       {/* Заголовок */}
-      <Group position="apart">
+      <Group mb={0} position="apart">
         {/* Левая часть */}
-        <Group p="xs" mb={-20}>
+        <Group p="xs" mb={-5}>
           <Avatar color="blue" size={24} radius="xl" ml={-10}>{getInitials(comment.creator.name)}</Avatar>
           {/*<Badge size="xs" variant="filled" ml={-10} sx={{ width: 16, height: 16, padding: 0}}>Ф</Badge>*/}
           <Text size="xs" fw={700} color="blue" ml={-5}>{comment.creator.name}</Text>
           <Text size="xs" color="dimmed" mx={-5}>{comment.date}</Text>
         </Group>
         {/* Правая часть - кнопка удаления комментария*/}
-        <Group mb={-20}>
+        <Group mb={-5}>
           <ActionIcon
-            size="xs"
-            variant="transparent"
+            size="xs" variant="transparent"
             onClick={() => removeCommentHandler()}
           >
             <IconTrash size={16} stroke={1.5}/>
           </ActionIcon>
         </Group>
       </Group>
-      {/* Текст */}
+      {/*Текст*/}
       <Group>
         <Code>{comment.text}</Code>
       </Group>
-    </Group>
+    </>
   )
 }
 export default DigestCommentItem;
