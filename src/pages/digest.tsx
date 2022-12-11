@@ -6,6 +6,7 @@ import {Grid} from "@mantine/core";
 import DigestCard from "../components/digest/digest-card";
 // Хук получения данных из стора
 import {useAppSelector} from "../hooks/redux";
+import {compareDesc} from "date-fns";
 
 // Компонент
 const Digest: FC = () => {
@@ -16,7 +17,9 @@ const Digest: FC = () => {
   return (
     <Grid>
       {/* Выводит данные из массива статей */}
-      {articles?.map((article) => (
+      {[...articles]
+        ?.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
+        .map((article) => (
         // Сетка
         <Grid.Col lg={12} xl={6} key={article.id}>
           {/* Карточка статьи */}
