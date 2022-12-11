@@ -8,6 +8,7 @@ import {IDigestArticle} from "../../models/i-digest-article";
 import DigestFooter from "./digest-footer";
 // Компонент секции комментариев дайджеста
 import DigestComments from "./digest-comments";
+import {isArticleNew} from "../../assets/snippets";
 
 // Тип пропсов карточки дайджеста: тип статьи дайджеста
 interface DigestCardProps {
@@ -40,9 +41,11 @@ const DigestCard: FC<DigestCardProps> = ({article}) => {
           {/* Заголовок */}
           <Text weight={500} color="blue">{article.title}</Text>
           {/* Бейдж */}
-          <Badge color="red" variant="light">
-            Новое
-          </Badge>
+          {isArticleNew(article.date) && (
+            <Badge color="red" variant="light">
+              Новая
+            </Badge>
+          )}
         </Group>
       </Card.Section>
       {/* Текст */}

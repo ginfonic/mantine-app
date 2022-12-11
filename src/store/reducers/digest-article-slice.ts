@@ -1,6 +1,5 @@
 // Стор приложения
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {v4 as uuidv4} from 'uuid';
 // Тип голосования, комментария и статьи дайджеста
 import {IDigestVote} from "../../models/i-digest-vote";
 import {IDigestComment} from '../../models/i-digest-comment';
@@ -16,11 +15,11 @@ interface IDigestArticleState {
 // Начальное состояние статьи дайджеста из тестовых данных
 const initialState: IDigestArticleState = {articles:
     digestSample?.map(item => ({
-        id: uuidv4(),
+        id: item.id,
         title: item.title,
         text: item.text,
         link: item.link,
-        date: new Date().toLocaleDateString('ru-RU'),
+        date: item.date,
         picture: item.picture,
         pros: [],
         cons: [],
