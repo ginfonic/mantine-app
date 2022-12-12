@@ -2,7 +2,6 @@
 import {FC, useState} from "react";
 import {Link} from "react-router-dom";
 import {Navbar, NavLink, ScrollArea, Badge} from "@mantine/core";
-// import {MantineNumberSize} from "@mantine/styles";
 import {
   IconDirections, IconShoppingCart, IconBook, IconBooks, IconBox, IconBrandTabler,
   IconClock, IconDashboard, IconFrame, IconHeartHandshake, IconHelicopter,
@@ -18,39 +17,6 @@ import {
   IconAddressBook, IconPaperclip, IconMailForward, IconArrowsTransferDown, IconFileText
 } from "@tabler/icons";
 
-// Тип пропсов элементов навигации (для вывода элементов из массива)
-// interface NavLinkProps {
-//   label: string;
-//   description?: string;
-//   icon?: any;
-//   rightSection?: any;
-//   variant?: 'filled' | 'light' | 'subtle';
-//   childrenOffset?: MantineNumberSize;
-//   // child?: NavLinkProps[];
-// }
-
-// Массив пропсов элементов навигации (для вывода элементов из массива)
-// const data: NavLinkProps[] = [
-//   { icon: IconNews,
-//     label: 'Дайджест',
-//     description: 'Всякая хрень',
-//     variant: "light",
-//     rightSection: <IconChevronRight size={14} stroke={1.5} />,
-//     // child: [
-//     //   { icon: IconNews, label: 'Дайджест 1', variant: "light"},
-//     //   { icon: IconNews, label: 'Дайджест 2', variant: "light"},
-//     //   { icon: IconNews, label: 'Дайджест 3', variant: "light"},
-//     // ]
-//   },
-//   {
-//     icon: IconBooks,
-//     label: 'База знаний',
-//     variant: "light"
-//   },
-//   { icon: IconHeart, label: 'Лучшие практики', variant: "light" },
-//   { icon: IconBox, label: 'КУБ', variant: "light" },
-// ];
-
 // Тип пропсов панели навигации
 interface NavigationBarProps {
   hidden: boolean;
@@ -59,23 +25,7 @@ interface NavigationBarProps {
 
 // Выводит панель навигации
 const NavigationBar: FC<NavigationBarProps> = ({hidden, useSubIcons= true}) => {
-  // const useSubIcons = true;
   const [active, setActive] = useState<number>(11);
-
-  // Выводит элемент навигации из массива
-  // const items = data.map((item, index) => (
-  //   <NavLink
-  //     key={item.label}
-  //     label={item.label}
-  //     description={item.description}
-  //     icon={<item.icon size={16} stroke={1.5} />}
-  //     rightSection={item.rightSection}
-  //     variant={item.variant}
-  //     childrenOffset={item.childrenOffset}
-  //     active={index === active}
-  //     onClick={() => setActive(index)}
-  //   />
-  // ));
 
   return (
     <Navbar p="0" hiddenBreakpoint="sm" hidden={hidden} width={{sm: (useSubIcons ? 250 : 220)}}>
