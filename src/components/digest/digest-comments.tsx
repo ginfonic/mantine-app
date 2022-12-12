@@ -63,7 +63,15 @@ const DigestComments: FC<DigestCommentsProps> = ({article, commentsOpened}) => {
         value={commentValue}
         placeholder="Ваш комментарий"
         mt={-5}
-        onChange={(event) => setCommentValue(event.currentTarget.value)}
+        onChange={(event) =>
+          setCommentValue(event.currentTarget.value)
+        }
+        onKeyDown={(event) => {
+          if(event.key === 'Enter') {
+            event.preventDefault();
+            addCommentHandler()
+          }
+        }}
         rightSection={
           // Кнопка подтверждения ввода
           <ActionIcon

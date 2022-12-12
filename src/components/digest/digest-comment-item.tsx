@@ -51,7 +51,7 @@ const DigestCommentItem: FC<DigestCommentItemProps> = ({article, comment}) => {
         </Group>
       </Group>
       {/*Текст*/}
-      <Group mt={-10}>
+      <Group mt={-15} mb={-5}>
         <Code>{comment.text}</Code>
       </Group>
     </Stack>
