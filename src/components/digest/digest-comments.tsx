@@ -1,6 +1,6 @@
 // Компонент комментариев дайджеста
 import {FC, useState} from "react";
-import {ActionIcon, Textarea} from "@mantine/core";
+import {Stack, Textarea, ActionIcon} from "@mantine/core";
 import {IconCheck} from "@tabler/icons";
 import {v4 as uuidv4} from 'uuid';
 
@@ -17,11 +17,12 @@ import DigestCommentItem from "./digest-comment-item";
 
 // Тип пропсов комментариев дайджеста
 interface DigestCommentsProps {
-  article: IDigestArticle
+  article: IDigestArticle,
+  commentsOpened: boolean
 }
 
 // Компонент
-const DigestComments: FC<DigestCommentsProps> = ({article}) => {
+const DigestComments: FC<DigestCommentsProps> = ({article, commentsOpened}) => {
   // Получение из стора
   // Получает текущего пользователя из стора
   const user = useAppSelector((state) =>
@@ -56,12 +57,12 @@ const DigestComments: FC<DigestCommentsProps> = ({article}) => {
   }
 
   return (
-    <>
+    <Stack hidden={!commentsOpened}>
       {/* Форма ввода текста */}
       <Textarea
         value={commentValue}
         placeholder="Ваш комментарий"
-        mb={5}
+        mt={-5}
         onChange={(event) => setCommentValue(event.currentTarget.value)}
         rightSection={
           // Кнопка подтверждения ввода
@@ -70,17 +71,17 @@ const DigestComments: FC<DigestCommentsProps> = ({article}) => {
             variant="transparent"
             sx={{alignItems: "flex-end"}}
             px={0} mx={0} pt={50}
-            onClick={() => {
-              addCommentHandler();
-            }}
+            onClick={() => addCommentHandler()}
           >
             <IconCheck size={16} stroke={1.5} />
           </ActionIcon>
         }
       />
-      {/* Выводит комментарии */}
-      {article.comments?.map((comment) => <DigestCommentItem article={article} comment={comment} key={uuidv4()}/>)}
-    </>
+      {/* Список комментариев */}
+      {article.comments?.map((comment) =>
+        <DigestCommentItem article={article} comment={comment} key={comment.id}/>
+      )}
+    </Stack>
   );
 }
 export default DigestComments;

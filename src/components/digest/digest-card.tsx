@@ -1,13 +1,11 @@
 // Компонент карточки дайджеста
-import {FC, useState} from "react";
+import {FC} from "react";
 import {Group, Card, Image, Text, Badge} from "@mantine/core";
 
 // Тип статьи дайджеста
 import {IDigestArticle} from "../../models/i-digest-article";
 // Компонент секции подвала дайджеста
 import DigestFooter from "./digest-footer";
-// Компонент секции комментариев дайджеста
-import DigestComments from "./digest-comments";
 import {isArticleNew} from "../../assets/snippets";
 
 // Тип пропсов карточки дайджеста: тип статьи дайджеста
@@ -19,10 +17,6 @@ interface DigestCardProps {
 const DigestCard: FC<DigestCardProps> = ({article}) => {
   // Заглушка отсутствующих фотографий
   const pictureDummy: string = "https://lost-car-keys-replacement.com/wp-content/uploads/No-image-yet-for-this-key-coming-soon-1536x1229.jpg";
-  // Стейт открытой/закрытой секции комментариев
-  const [commentsOpened, setCommentsOpened] = useState<boolean>(false);
-  // Коллбэк переключения стейта открытой/закрытой секции комментариев для выхова из копмпонента подвала
-  const toggleCommentsOpened = () => setCommentsOpened((o) => !o);
 
   return (
     // Карточка
@@ -54,13 +48,9 @@ const DigestCard: FC<DigestCardProps> = ({article}) => {
           {article.text}
         </Text>
       </Card.Section>
-      {/* Подвал с кнопками */}
-      <Card.Section inheritPadding>
-        <DigestFooter article={article} toggleCommentsOpened={toggleCommentsOpened}/>
-      </Card.Section>
-      {/* Комментарии */}
-      <Card.Section inheritPadding pb="md" mt="md" hidden={!commentsOpened}>
-        <DigestComments article={article}/>
+      {/* Подвал с кнопками и блоком комментариев */}
+      <Card.Section inheritPadding pb='md'>
+        <DigestFooter article={article}/>
       </Card.Section>
     </Card>
   );
