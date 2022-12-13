@@ -123,7 +123,9 @@ const DigestFooter: FC<DigestFooterProps> = ({article}) => {
           <ActionIcon size="xs" variant="transparent" px={0} mx={0} >
             <IconCalendarEvent size={16} stroke={1.5} />
           </ActionIcon>
-          <Text size="xs" color="dimmed" ml={-10}>{new Date(article.date).toLocaleDateString()}</Text>
+          <Text size="xs" color="dimmed" ml={-10}>
+            {new Date(article.date).toLocaleDateString('ru-RU')}
+          </Text>
         </Group>
       </Group>
       {/* Нижняя часть: блок комментариев */}

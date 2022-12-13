@@ -1,5 +1,5 @@
 // Компонент панели навигации
-import {FC, useState} from "react";
+import {FC, useState, ReactElement} from "react";
 import {Link, To} from "react-router-dom";
 import {Navbar, NavLink, ScrollArea, Badge} from "@mantine/core";
 import {TablerIcon,
@@ -22,7 +22,7 @@ interface INavLink {
   label: string,
   icon: TablerIcon,
   to?: To,
-  rightSection?: any,
+  rightSection?: ReactElement,
   children?: INavLink[]
 }
 
@@ -47,8 +47,7 @@ const navLinks: INavLink[] = [
   {label: 'Управляющие ГОСБ', icon: IconFriends, to: '/Link2/'},
   {label: 'Мои задачи', icon: IconListDetails, to: '/Link2/', rightSection:
     <Badge
-      size="xs" variant="filled"
-      sx={{ width: 16, height: 16, padding: 0 }}
+      size="xs" variant="filled" sx={{ width: 16, height: 16, padding: 0 }}
     >3
     </Badge>
   },
