@@ -114,7 +114,7 @@ const NavigationBar: FC<NavigationBarProps> = ({hidden, useSubIcons= true}) => {
         {navLinks.map((item, index1) =>
           // Если нет дочерних элементов
           !item.children
-          // Нижний уровень со ссылками
+          // Верхний уровень со ссылками
           ? (<NavLink
             key={100*index1}
             label={item.label}
@@ -132,12 +132,12 @@ const NavigationBar: FC<NavigationBarProps> = ({hidden, useSubIcons= true}) => {
             icon={<item.icon size={16} stroke={1.5} />}
             childrenOffset={28}
           >
-            {/* Дочерние элементы нижнего уровня со ссылками*/}
+            {/* Дочерние элементы нижнего уровня со ссылками */}
             {item.children.map((item, index2) =>
               (<NavLink
                 key={100*index1+index2}
                 label={item.label}
-                icon={<item.icon size={16} stroke={1.5} />}
+                icon={useSubIcons ? (<item.icon size={16} stroke={1.5}/>) : undefined}
                 active={100*index1+index2===active}
                 onClick={() => setActive(100*index1+index2)}
                 component={Link}
