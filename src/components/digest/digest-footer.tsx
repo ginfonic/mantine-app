@@ -26,21 +26,17 @@ const DigestFooter: FC<DigestFooterProps> = ({article}) => {
   const user = useAppSelector((state) =>
     state.currentUser.user
   );
-  // Получает число комментариев из стора
-  const commentsNum = useAppSelector((state) =>
+  // Получает статьи из стора
+  const articles = useAppSelector((state) =>
     state.digestArticles.articles
-  )?.find(item => item.id === article.id
-  )?.comments.length;
-  // Получает число голосов за из стора
-  const prosNum = useAppSelector((state) =>
-    state.digestArticles.articles
-  )?.find(item => item.id === article.id
-  )?.pros.length;
-  // Получает число голосов против из стора
-  const consNum = useAppSelector((state) =>
-    state.digestArticles.articles
-  )?.find(item => item.id === article.id
-  )?.cons.length;
+  );
+
+  // Получает число комментариев
+  const commentsNum = articles?.find(item => item.id === article.id)?.comments.length;
+  // Получает число голосов за
+  const prosNum = articles?.find(item => item.id === article.id)?.pros.length;
+  // Получает число голосов против
+  const consNum = articles?.find(item => item.id === article.id )?.cons.length;
 
   // Отправка в стор
   // Функция отправки данных в стор
