@@ -11,6 +11,5 @@ export interface IDigestArticle {
   picture: string,
   pros: IDigestVote[],
   cons: IDigestVote[],
-  comments: IDigestComment[],
-  commentsOpened: boolean
+  comments: IDigestComment[]
 }

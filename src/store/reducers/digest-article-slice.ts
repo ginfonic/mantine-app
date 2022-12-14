@@ -21,10 +21,9 @@ const initialState: IDigestArticleState = {articles:
         link: item.link,
         date: item.date,
         picture: item.picture,
-        pros: [],
-        cons: [],
-        comments: [],
-        commentsOpened: false
+        pros: item.pros,
+        cons: item.cons,
+        comments: item.comments
       })
     )
   };
