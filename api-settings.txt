@@ -1,0 +1,8 @@
+Your JSON bin has been created, with id eec6481be2ca.
+
+URI to access this JSON bin:
+
+https://json.extendsclass.com/bin/eec6481be2ca
+URI to access this JSON in a text editor:
+
+https://extendsclass.com/jsonstorage/eec6481be2ca
