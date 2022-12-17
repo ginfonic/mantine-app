@@ -43,7 +43,7 @@ const DigestCard: FC<DigestCardProps> = ({article}) => {
       </Card.Section>
       {/* Текст */}
       <Card.Section inheritPadding>
-        <Text size="sm" color="dimmed" mb="sm">
+        <Text size="sm" color="dimmed" mb="sm" /*component="a" href={article.link}*/>
           {article.text}
         </Text>
       </Card.Section>
