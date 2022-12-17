@@ -16,7 +16,7 @@ interface DigestCardProps {
 // Компонент
 const DigestCard: FC<DigestCardProps> = ({article}) => {
   // Заглушка отсутствующих фотографий
-  const pictureDummy: string = "https://lost-car-keys-replacement.com/wp-content/uploads/No-image-yet-for-this-key-coming-soon-1536x1229.jpg";
+  // const pictureDummy: string = "https://lost-car-keys-replacement.com/wp-content/uploads/No-image-yet-for-this-key-coming-soon-1536x1229.jpg";
 
   return (
     // Карточка
@@ -24,9 +24,8 @@ const DigestCard: FC<DigestCardProps> = ({article}) => {
       {/* Картинка */}
       <Card.Section>
         <Image
-          src={((article.picture === undefined) || (article.picture === "")) ? pictureDummy : article.picture}
-          height={160}
-          alt="Нет фото"
+          // src={((article.picture === undefined) || (article.picture === "")) ? pictureDummy : article.picture}
+          src={article.picture} height={160} withPlaceholder //component="a" href={article.link}
         />
       </Card.Section>
       {/* Заголовок и бейдж */}
