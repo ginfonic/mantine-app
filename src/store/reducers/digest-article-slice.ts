@@ -1,32 +1,43 @@
 // Стор приложения
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction, createAsyncThunk} from "@reduxjs/toolkit";
 // Тип голосования, комментария и статьи дайджеста
 import {IDigestVote} from "../../models/i-digest-vote";
 import {IDigestComment} from '../../models/i-digest-comment';
 import {IDigestArticle} from '../../models/i-digest-article';
 
 // Тестовые данные для заполнения массива статей
-import digestSample from "../../assets/sample-digest.json";
+// import digestSample from "../../assets/sample-digest.json";
 
 // Тип начального состояния статьи дайджеста
 interface IDigestArticleState {
-  articles: IDigestArticle[]
+  articles: IDigestArticle[],
+  loading: boolean,
+  error: string | null
 }
-// Начальное состояние статьи дайджеста из тестовых данных
-const initialState: IDigestArticleState = {articles:
-  digestSample?.map(item => ({
-    id: item.id,
-    title: item.title,
-    text: item.text,
-    link: item.link,
-    date: item.date,
-    picture: item.picture,
-    pros: item.pros,
-    cons: item.cons,
-    comments: item.comments
-  }))
-};
 
+// Начальное состояние статьи дайджеста
+const initialState: IDigestArticleState = {
+  articles: [],
+  loading: false,
+  error: null
+}
+
+// Начальное состояние статьи дайджеста из тестовых данных
+// const initialState: IDigestArticleState = {articles:
+//   digestSample?.map(item => ({
+//     id: item.id,
+//     title: item.title,
+//     text: item.text,
+//     link: item.link,
+//     date: item.date,
+//     picture: item.picture,
+//     pros: item.pros,
+//     cons: item.cons,
+//     comments: item.comments
+//   }))
+// };
+
+//
 const digestArticleSlice = createSlice({
   name: 'articles',
   initialState,
@@ -85,8 +96,31 @@ const digestArticleSlice = createSlice({
         currentArticle.comments = currentArticle.comments.filter((comment) => comment.id !== plComment.id);
       }
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchArticles.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchArticles.fulfilled, (state, action) => {
+        state.articles = action.payload;
+        state.loading = false;
+
+      })
   }
 })
+
+//
+export const fetchArticles =
+  createAsyncThunk<IDigestArticle[], undefined, {rejectValue: string}>(
+    'articles/fetchArticles',
+    async (_, {rejectWithValue}) => {
+      const response = await fetch('https://extendsclass.com/jsonstorage/eec6481be2ca');
+      if(!response.ok) return rejectWithValue('Server error');
+      return await response.json();
+    }
+  )
 
 // Экспортирует редюсеры с экшенами
 export const {/*addArticle, removeArticle, */togglePro, toggleCon, addComment, removeComment} = digestArticleSlice.actions;

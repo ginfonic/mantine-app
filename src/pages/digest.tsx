@@ -1,19 +1,27 @@
 // Страница дайджеста
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import {Grid} from "@mantine/core";
 
 // Компонент карточки дайджеста
 import DigestCard from "../components/digest/digest-card";
 // Хук получения данных из стора
-import {useAppSelector} from "../hooks/redux";
+import {useAppSelector, useAppDispatch} from "../hooks/redux";
+//
+import {fetchArticles} from "../store/reducers/digest-article-slice";
 import {compareDesc} from "date-fns";
 
 // Компонент
 const Digest: FC = () => {
+  //
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchArticles());
+  }, [dispatch]);
   // Получает статьи из стора
   const articles = useAppSelector((state) =>
     state.digestArticles.articles
   );
+
   return (
     <Grid>
       {/* Выводит данные из массива статей */}
