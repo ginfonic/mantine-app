@@ -12,10 +12,11 @@ export const isArticleNew = (date: string): boolean => {
   // return new Date(date) >= subMonths(new Date(), 1);
   return compareAsc(new Date(date), subMonths(new Date(), 1)) !== -1;
 }
-// Добавляет ссылку в текст
-// export const addlink = (text: string, link: string) => {
-//   const words: string[] = text.split(' ');
-//   const linkOpenTag = `<a {link}>`;
-//   const linkCloseTag = '</a>';
-//   return 1
-// }
+// Выделяет ссылку в тексте: от одного до трех слов в зависимости от их длины
+export const separateAnchor = (text: string): [anchor: string, rest: string] => {
+  const words: string[] = text.split(' ');
+  for (let index = 0; words.length - 1; index++)
+    if((words[index].length >= 3) || (index === 2))
+      return [words.slice(0, index + 1).join(' '), words.slice(index + 1).join(' ')];
+  return ['', text];
+}
