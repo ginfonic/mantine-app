@@ -14,19 +14,18 @@ interface IDigestArticleState {
 }
 // Начальное состояние статьи дайджеста из тестовых данных
 const initialState: IDigestArticleState = {articles:
-    digestSample?.map(item => ({
-        id: item.id,
-        title: item.title,
-        text: item.text,
-        link: item.link,
-        date: item.date,
-        picture: item.picture,
-        pros: item.pros,
-        cons: item.cons,
-        comments: item.comments
-      })
-    )
-  };
+  digestSample?.map(item => ({
+    id: item.id,
+    title: item.title,
+    text: item.text,
+    link: item.link,
+    date: item.date,
+    picture: item.picture,
+    pros: item.pros,
+    cons: item.cons,
+    comments: item.comments
+  }))
+};
 
 const digestArticleSlice = createSlice({
   name: 'articles',
