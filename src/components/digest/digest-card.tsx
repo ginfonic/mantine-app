@@ -48,8 +48,10 @@ const DigestCard: FC<DigestCardProps> = ({article}) => {
       <Card.Section inheritPadding>
         <Text size="sm" color="dimmed" mb="sm">
           {/* Якорь для ссылки */}
-          <Anchor href={article.link} target="_blank">{anchor} </Anchor>
-          {/* Остаток текста статьи */}
+          <Anchor href={article.link} target="_blank" color="blue">{anchor}</Anchor>
+          {/* Пробел между якорем и остатком текста */}
+          {anchor !== '' ? ' ' : ''}
+          {/* Остаток текста */}
           {rest}
         </Text>
       </Card.Section>

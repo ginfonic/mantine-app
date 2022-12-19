@@ -12,11 +12,15 @@ export const isArticleNew = (date: string): boolean => {
   // return new Date(date) >= subMonths(new Date(), 1);
   return compareAsc(new Date(date), subMonths(new Date(), 1)) !== -1;
 }
-// Выделяет ссылку в тексте: от одного до трех слов в зависимости от их длины
+// Выделяет ссылку в тексте: до трех слов в зависимости от их длины
 export const separateAnchor = (text: string): [anchor: string, rest: string] => {
+  // Делит строку статьи на слова
   const words: string[] = text.split(' ');
-  for (let index = 0; words.length - 1; index++)
-    if((words[index].length >= 3) || (index === 2))
-      return [words.slice(0, index + 1).join(' '), words.slice(index + 1).join(' ')];
-  return ['', text];
+  // Для первых максимум трех слов в статье ищет слово длиной не меньше трех символов
+  let index = 0;
+  for (index; (index < 2) && (index < words.length); index++)
+    // Прекращает, когда его находит
+    if(words[index].length >= 3) break;
+  // Возвращает два значения. Якорь: до трех первых слов. Остаток: оставшиеся слова в статье
+  return [words.slice(0, index + 1).join(' '), words.slice(index + 1).join(' ')];
 }
