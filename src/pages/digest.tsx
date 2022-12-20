@@ -5,15 +5,17 @@ import {compareDesc} from "date-fns";
 
 // Компонент карточки дайджеста
 import DigestCard from "../components/digest/digest-card";
-// Хук получения данных из стора
+// Хук получения данных из стора и отправки в стор
 import {useAppSelector, useAppDispatch} from "../hooks/redux";
-//
+// Экшн загрузки статей из базы данных
 import {fetchArticles} from "../store/reducers/digest-article-slice";
 
 // Компонент
 const Digest: FC = () => {
-  //
+  // Операции со стором
+  // Функция отправки данных в стор
   const dispatch = useAppDispatch();
+  // Отправляет в стор статьи, полученные из базы данных
   useEffect(() => {
     dispatch(fetchArticles());
   }, [dispatch]);

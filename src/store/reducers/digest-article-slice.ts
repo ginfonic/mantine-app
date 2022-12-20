@@ -1,4 +1,4 @@
-// Стор приложения
+// Слайс стора Redux для статей дайджеста
 import {createSlice, PayloadAction, createAsyncThunk} from "@reduxjs/toolkit";
 // Тип голосования, комментария и статьи дайджеста
 import {IDigestVote} from "../../models/i-digest-vote";
@@ -37,7 +37,7 @@ const initialState: IDigestArticleState = {
 //   }))
 // };
 
-//
+// Экшн загрузки статей из внешней базы данных
 export const fetchArticles =
   createAsyncThunk<IDigestArticle[], undefined, {rejectValue: string}>(
     'articles/fetchArticles',
@@ -48,7 +48,7 @@ export const fetchArticles =
     }
   )
 
-//
+// Слайс
 const digestArticleSlice = createSlice({
   name: 'articles',
   initialState,
@@ -110,14 +110,15 @@ const digestArticleSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Редюсер ожидания загрузки статей
       .addCase(fetchArticles.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
+      // Редюсер окончания загрузки статей
       .addCase(fetchArticles.fulfilled, (state, action) => {
         state.articles = action.payload;
         state.loading = false;
-
       })
   }
 })

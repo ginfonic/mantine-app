@@ -12,6 +12,7 @@ interface IUserState {
 // Начальное состояние слайса пользователей
 const initialState: IUserState = {user: {id: uuidv4(), name: 'Фокин Евгений Александрович'}}
 
+// Слайс
 const userSlice = createSlice({
   name: 'user',
   initialState,
