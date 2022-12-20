@@ -38,6 +38,17 @@ const initialState: IDigestArticleState = {
 // };
 
 //
+export const fetchArticles =
+  createAsyncThunk<IDigestArticle[], undefined, {rejectValue: string}>(
+    'articles/fetchArticles',
+    async (_, {rejectWithValue}) => {
+      const response = await fetch('https://json.extendsclass.com/bin/eec6481be2ca');
+      if(!response.ok) return rejectWithValue('Server error');
+      return await response.json();
+    }
+  )
+
+//
 const digestArticleSlice = createSlice({
   name: 'articles',
   initialState,
@@ -110,17 +121,6 @@ const digestArticleSlice = createSlice({
       })
   }
 })
-
-//
-export const fetchArticles =
-  createAsyncThunk<IDigestArticle[], undefined, {rejectValue: string}>(
-    'articles/fetchArticles',
-    async (_, {rejectWithValue}) => {
-      const response = await fetch('https://extendsclass.com/jsonstorage/eec6481be2ca');
-      if(!response.ok) return rejectWithValue('Server error');
-      return await response.json();
-    }
-  )
 
 // Экспортирует редюсеры с экшенами
 export const {/*addArticle, removeArticle, */togglePro, toggleCon, addComment, removeComment} = digestArticleSlice.actions;

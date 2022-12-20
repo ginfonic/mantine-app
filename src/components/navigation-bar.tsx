@@ -35,7 +35,7 @@ const navLinks: INavLink[] = [
     {label: 'База лучших практик', icon: IconStar, to: '/Link2/'},
     {label: 'ГЧП/Лизинг/Инвесты', icon: IconLicense, to: '/Link1/'}
   ]},
-  {label: 'ГВК по ДЗО', icon: IconSpeakerphone, to: '/'},
+  {label: 'ГВК по ДЗО', icon: IconSpeakerphone, to: '/Link1/'},
   {label: 'База знаний', icon: IconBook, to: '/Link2/'},
   {label: 'Продуктовая полка', icon: IconShoppingCart, children: [
     {label: 'Отчет: полка', icon: IconReport, to: '/Link1/'},

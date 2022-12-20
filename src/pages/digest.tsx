@@ -1,6 +1,7 @@
 // Страница дайджеста
 import {FC, useEffect} from "react";
 import {Grid} from "@mantine/core";
+import {compareDesc} from "date-fns";
 
 // Компонент карточки дайджеста
 import DigestCard from "../components/digest/digest-card";
@@ -8,7 +9,6 @@ import DigestCard from "../components/digest/digest-card";
 import {useAppSelector, useAppDispatch} from "../hooks/redux";
 //
 import {fetchArticles} from "../store/reducers/digest-article-slice";
-import {compareDesc} from "date-fns";
 
 // Компонент
 const Digest: FC = () => {
